@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - AgriBazaar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #208a25;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4CAF50;
+      margin: 40px 0 20px;
+      font-size: 1.8rem;
+    }
+
+    form {
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .payment-options {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      gap: 20px;
+    }
+
+    .option {
+      flex: 1;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    .option img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .option.selected {
+      border-color: #208a25;
+      background-color: #f1fff1;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .place-order {
+      background-color: #208a25;
+      color: white;
+    }
+
+    .place-order:hover {
+      background-color: #388e3c;
+    }
+
+    .go-back {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
+    .go-back:hover {
+      background-color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AgriBazaar</h1>
+    <nav>
+      <a href="ex.html">Home</a>
+      <a href="ex.html#products">Products</a>
+      <a href="ex.html#settings">Settings</a>
+      <a href="ex.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <h2>Checkout</h2>
+
+  <form id="checkoutForm">
+    <label for="address">Delivery Address</label>
+    <textarea id="address" rows="4" placeholder="Enter your full delivery address..." required></textarea>
+
+    <label>Choose Payment Type</label>
+    <div class="payment-options">
+      <div class="option" id="cod" data-value="cod">
+        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/96/000000/external-delivery-online-shopping-flaticons-lineal-color-flat-icons-2.png" alt="COD" />
+        <div>Cash on Delivery</div>
+      </div>
+
+      <div class="option" id="online" data-value="online">
+        <img src="https://img.icons8.com/color/96/000000/online-payment-.png" alt="Online" />
+        <div>Online Payment</div>
+      </div>
+    </div>
+
+    <input type="hidden" id="paymentType" name="paymentType" />
+
+    <div class="btn-group">
+      <button type="button" class="go-back btn" onclick="goBack()">Go Back</button>
+      <button type="submit" class="place-order btn">Place Order</button>
+    </div>
+  </form>
+
+  <footer>
+    <p>&copy; 2025 AgriBazaar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    
+    function goBack() {
+      window.location.href = "cart.html";
+    }
+
+    const paymentOptions = document.querySelectorAll(".option");
+    const paymentInput = document.getElementById("paymentType");
+
+    paymentOptions.forEach(option => {
+      option.addEventListener("click", () => {
+        paymentOptions.forEach(o => o.classList.remove("selected"));
+        option.classList.add("selected");
+        paymentInput.value = option.dataset.value;
+      });
+    });
+
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const address = document.getElementById("address").value.trim();
+      const payment = paymentInput.value;
+
+      if (!address || !payment) {
+        alert("Please complete all fields.");
+        return;
+      }
+      localStorage.removeItem("cart");
+      window.location.href = "success.html";
+      
+    });
+  </script>
+</body>
+</html>
