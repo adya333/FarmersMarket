@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+     <nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img class="logo" src="../../asessts/logo.jpg" alt=""></a>
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left-aligned links -->
+      <div class="navbar-nav">
+        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="../index.html">Dashboard</a>
+        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="./Orders/index.html">Orders</a>
+        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Inventory</a>
+        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Products</a>
+        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Payments</a>
+
+       
+      </div>
+
+      <!-- Right-aligned profile image -->
+      <div class="ms-auto d-flex align-items-center">
+        <img src="../../asessts/profile.jpg" alt="Profile" class="rounded-circle" width="40" height="40">
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container py-4">
+  <h2 class="text-center mb-4">All Orders</h2>
+   
+  <!-- Filter Section -->
+<div class="row mb-4">
+  <div class="col-md-3">
+    <label for="startDate" class="form-label">Start Date</label>
+    <input type="date" class="form-control" id="startDate">
+  </div>
+  <div class="col-md-3">
+    <label for="endDate" class="form-label">End Date</label>
+    <input type="date" class="form-control" id="endDate">
+  </div>
+  <div class="col-md-3">
+    <label for="paymentStatus" class="form-label">Order Status</label>
+    <select class="form-select" id="paymentStatus">
+      <option value="">All</option>
+      <option value="Paid">Delivered</option>
+      <option value="Pending">On the Way</option>
+      <option value="Failed">Cancelled</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label for="maxPrice" class="form-label">Max Price</label>
+    <input type="number" class="form-control" id="maxPrice" placeholder="₹">
+  </div>
+  <div class="col-md-1 d-flex align-items-end">
+    <button class="btn btn-success w-100" onclick="applyFilters()">Go</button>
+  </div>
+</div>
+
+
+  <div class="card shadow">
+    
+    <div class="card-body">
+      <table class="table table-bordered text-center table-hover">
+        <thead class="thcolor">
+          <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Order Status</th>
+            <th>Transaction ID</th>
+          </tr>
+        </thead>
+        <tbody id="orderBody">
+          <!-- Rows will be inserted via JS -->
+        </tbody>
+      </table>
+
+      <nav class="pgB">
+        <ul class="pagination justify-content-center" id="pagination">
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
