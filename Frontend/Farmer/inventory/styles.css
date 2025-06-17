@@ -1,0 +1,243 @@
+:root {
+  --primary-green: #208a25;
+  --dark-green: #186b1c;
+  --light-gray: #f4f6f9;
+  --text-color: #333;
+  --border-color: #dee2e6;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --animation-speed: 0.3s;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  height: 100vh;
+  background-color: var(--primary-green);
+  color: white;
+  padding-top: 2rem;
+  box-shadow: 2px 0 10px var(--shadow-light);
+  transition: width var(--animation-speed) ease-in-out;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.sidebar-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 3rem; /* More space for the title */
+  color: #e0ffe0; /* Slightly lighter green for title */
+}
+
+.sidebar a {
+  color: white;
+  display: flex; /* Use flex for icon and text alignment */
+  align-items: center;
+  padding: 0.9rem 1.5rem; /* Increased padding for better touch targets */
+  text-decoration: none;
+  transition: background var(--animation-speed) ease,
+    padding-left var(--animation-speed) ease;
+  font-weight: 500;
+  border-left: 5px solid transparent; /* For active indicator */
+}
+
+.sidebar a i {
+  font-size: 1.1rem;
+  margin-right: 12px; /* Space between icon and text */
+}
+
+.sidebar a:hover {
+  background-color: var(--dark-green);
+  padding-left: 1.8rem; /* Slight indent on hover */
+}
+
+.sidebar a.active {
+  background-color: var(--dark-green);
+  border-left-color: #aaffaa; /* Bright green active indicator */
+  font-weight: 600;
+}
+
+/* Main Content Area */
+.main-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 2.5rem;
+  transition: all var(--animation-speed) ease-in-out;
+}
+
+.header-section {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.add-product-btn {
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+  font-weight: 500;
+  transition: background var(--animation-speed) ease,
+    transform var(--animation-speed) ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+}
+
+.add-product-btn:hover {
+  background-color: var(--dark-green);
+  border-color: var(--dark-green);
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Filter and Search Section */
+.filter-section .form-control,
+.filter-section .form-select {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-section .form-control:focus,
+.filter-section .form-select:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 0.25rem rgba(32, 138, 37, 0.25);
+}
+
+/* Table Styling */
+.inventory-table-container {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures rounded corners apply to table inside */
+  box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.table {
+  margin-bottom: 0; /* Remove default table margin */
+}
+
+.table thead th {
+  background-color: var(--primary-green);
+  color: white;
+  font-weight: 600;
+  padding: 1rem 1.2rem;
+  vertical-align: middle;
+  border-bottom: none; /* Remove default bootstrap border */
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f8f0; /* Light green hover for rows */
+}
+
+.table tbody td {
+  padding: 1rem 1.2rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Badge for Status */
+.badge {
+  padding: 0.5em 0.8em;
+  border-radius: 0.35rem;
+  font-weight: 600;
+}
+.badge.bg-success {
+  background-color: #28a745 !important; /* Green for available */
+}
+.badge.bg-danger {
+  background-color: #dc3545 !important; /* Red for out of stock */
+}
+
+/* Action Buttons in Table */
+.edit-btn,
+.delete-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  transition: all var(--animation-speed) ease;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-green);
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 5px 20px var(--shadow-light);
+}
+
+.modal-header {
+  background-color: var(--primary-green);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+
+.modal-header .btn-close {
+  filter: invert(1); /* Makes the close button white */
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 1rem 1.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 5px;
+  padding: 0.75rem 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .sidebar {
+    height: auto;
+    padding-bottom: 1rem;
+  }
+  .main-content {
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1.5rem;
+  }
+  .filter-section div {
+    margin-bottom: 1rem;
+  }
+  .filter-section div:last-child {
+    margin-bottom: 0;
+  }
+}

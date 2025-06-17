@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Inventory - AgriBazaar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 sidebar d-none d-md-block">
+          <h4 class="text-center mb-4 sidebar-title">Farmer Panel</h4>
+          <a href="#"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+          <a href="#" class="active"
+            ><i class="fas fa-boxes me-2"></i>My Inventory</a
+          >
+          <a href="#"><i class="fas fa-plus-circle me-2"></i>Add Product</a>
+          <a href="#"><i class="fas fa-shopping-cart me-2"></i>Orders</a>
+          <a href="#"><i class="fas fa-rupee-sign me-2"></i>Payments</a>
+          <a href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+        </nav>
+
+        <main class="col-md-10 ms-sm-auto px-md-4 py-4 main-content">
+          <div
+            class="d-flex justify-content-between align-items-center mb-4 header-section"
+          >
+            <h2 class="section-title">My Inventory</h2>
+            <button
+              class="btn btn-primary add-product-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#addProductModal"
+            >
+              <i class="fas fa-plus-circle me-2"></i>Add New Product
+            </button>
+          </div>
+
+          <div class="row mb-4 filter-section">
+            <div class="col-md-4">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Search products..."
+              />
+            </div>
+            <div class="col-md-4">
+              <select id="categoryFilter" class="form-select">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-outline-secondary w-100" id="resetFilters">
+                Reset Filters
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive inventory-table-container">
+            <table class="table table-bordered table-hover" id="inventoryTable">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Price (₹/kg)</th>
+                  <th>Stock (kg)</th>
+                  <th>Unit</th>
+                  <th>Status</th>
+                  <th>Last Updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="addProductModal"
+      tabindex="-1"
+      aria-labelledby="addProductModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <form class="modal-content" id="addProductForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addProductModalLabel">
+              Add New Product
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-2">
+              <label class="form-label">Product Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productName"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Category</label>
+              <select
+                class="form-select"
+                id="productCategory"
+                required
+              ></select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Price (₹)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="productPrice"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Unit</label>
+              <select class="form-select" id="productUnit" required>
+                <option value="kg">kg</option>
+                <option value="quintal">Quintal</option>
+                <option value="ton">Ton</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Stock</label>
+              <input
+                type="number"
+                class="form-control"
+                id="productStock"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="productStatus" required>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="editProductModal"
+      tabindex="-1"
+      aria-labelledby="editProductModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <form class="modal-content" id="editProductForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="editRowIndex" />
+            <div class="mb-2">
+              <label class="form-label">Product Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="editProductName"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Category</label>
+              <select
+                class="form-select"
+                id="editProductCategory"
+                required
+              ></select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Price (₹)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="editProductPrice"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Unit</label>
+              <select class="form-select" id="editProductUnit" required>
+                <option value="kg">kg</option>
+                <option value="quintal">Quintal</option>
+                <option value="ton">Ton</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Stock</label>
+              <input
+                type="number"
+                class="form-control"
+                id="editProductStock"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="editProductStatus" required>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
