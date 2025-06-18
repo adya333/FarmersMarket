@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manage Users - AgriBazaar</title>
-
-  <!-- Bootstrap CSS -->
+  <title>Orders - AgriBazaar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <!-- Reuse admin styles -->
   <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
@@ -25,64 +22,59 @@
           <button class="btn btn-sm btn-outline-success">Logout</button>
         </div>
 
-        <!-- Orders Section (Hidden by default) -->
+        <!-- Orders Section -->
         <div class="container mt-4">
             <h5 class="mb-3">Orders List</h5>
+
+            <!-- Filter Controls -->
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="text" id="customerFilter" class="form-control" placeholder="Filter by customer">
+                </div>
+                <div class="col-md-3">
+                    <select id="statusFilter" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="processing">Processing</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="amountFilter" class="form-control" placeholder="Filter by amount">
+                </div>
+                <div class="col-md-3">
+                    <button id="resetFilters" class="btn btn-outline-success">Reset Filters</button>
+                </div>
+            </div>
 
             <table class="table table-bordered table-hover bg-white shadow-sm">
                 <thead class="table-success">
                     <tr>
                         <th>Order ID</th>
-                        <th>Customer</th>
+                        <th>User</th>
                         <th>Items</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr data-order-id="ABZ-1001">
-                        <td>ABZ-1001</td>
-                        <td>John Smith</td>
-                        <td>5</td>
-                        <td>₹245.00</td>
-                        <td><span class="badge status-badge status-processing">Processing</span></td>
-                        <td><button class="btn btn-sm btn-outline-primary update-btn">Update</button></td>
-                    </tr>
-                    <tr data-order-id="ABZ-1000">
-                        <td>ABZ-1000</td>
-                        <td>Sarah Johnson</td>
-                        <td>3</td>
-                        <td>₹150.00</td>
-                        <td><span class="badge status-badge status-processing">Processing</span></td>
-                        <td><button class="btn btn-sm btn-outline-primary update-btn">Update</button></td>
-                    </tr>
-                    <tr data-order-id="ABZ-0999">
-                        <td>ABZ-0999</td>
-                        <td>GreenGrocers Inc</td>
-                        <td>12</td>
-                        <td>₹1,245.00</td>
-                        <td><span class="badge status-badge status-processing">Processing</span></td>
-                        <td><button class="btn btn-sm btn-outline-primary update-btn">Update</button></td>
-                    </tr>
-                    <tr data-order-id="ABZ-0998">
-                        <td>ABZ-0998</td>
-                        <td>Mike Brown</td>
-                        <td>2</td>
-                        <td>₹45.00</td>
-                        <td><span class="badge status-badge status-processing">Processing</span></td>
-                        <td><button class="btn btn-sm btn-outline-primary update-btn">Update</button></td>
-                    </tr>
-                    <tr data-order-id="ABZ-0997">
-                        <td>ABZ-0997</td>
-                        <td>Farm Fresh Co.</td>
-                        <td>8</td>
-                        <td>₹690.00</td>
-                        <td><span class="badge status-badge status-processing">Processing</span></td>
-                        <td><button class="btn btn-sm btn-outline-primary update-btn">Update</button></td>
-                    </tr>
+                <tbody id="ordersTableBody">
+                    <!-- orders data will be loaded here -->
                 </tbody>
             </table>
+
+            <!-- Pagination Controls -->
+            <nav aria-label="Orders pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" id="prevPage">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" id="nextPage">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <!-- Bootstrap Modal for Status Update -->
@@ -94,11 +86,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <select class="form-select" id="statusOption">
+                        <select class="form-select" id="statusOption" required>Select
                         <option value="processing">Processing</option>
                         <option value="delivered">Delivered</option>
                         <option value="cancelled">Cancelled</option>
                         </select>
+                        <div id="statusValidation" class="invalid-feedback"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

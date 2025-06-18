@@ -62,17 +62,17 @@ body {
 }
 
 .status-processing {
-  background-color: #FFC107; /* Yellow */
+  background-color: #FFC107;
   color: #000;
 }
 
 .status-delivered {
-  background-color: #28A745; /* Green */
+  background-color: #28A745;
   color: white;
 }
 
 .status-cancelled {
-  background-color: #DC3545; /* Red */
+  background-color: #DC3545;
   color: white;
 }
 
@@ -81,8 +81,6 @@ body {
 }
 
 /* === Responsive Design === */
-
-/* Hide sidebar by default on small screens */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;

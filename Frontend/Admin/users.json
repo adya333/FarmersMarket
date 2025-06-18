@@ -1,0 +1,186 @@
+{
+  "farmers": [
+    {
+      "id": 101,
+      "name": "Adya Mishra",
+      "email": "adya@gmail.com",
+      "location": "Ahmedabad"
+    },
+    {
+      "id": 103,
+      "name": "Akash Mishra",
+      "email": "akash@gmail.com",
+      "location": "Kolkata"
+    },
+    {
+      "id": 105,
+      "name": "Rohit Kumar",
+      "email": "rohit@gmail.com",
+      "location": "Pune"
+    },
+    {
+      "id": 107,
+      "name": "Sonal Verma",
+      "email": "sonal@gmail.com",
+      "location": "Mumbai"
+    },
+    {
+      "id": 109,
+      "name": "Vikas Singh",
+      "email": "vikas@gmail.com",
+      "location": "Mumbai"
+    },
+    {
+      "id": 111,
+      "name": "Meena Joshi",
+      "email": "meena@gmail.com",
+      "location": "Chennai"
+    },
+    {
+      "id": 113,
+      "name": "Anil Deshmukh",
+      "email": "anil@gmail.com",
+      "location": "Delhi"
+    },
+    {
+      "id": 115,
+      "name": "Sunita Rani",
+      "email": "sunita@gmail.com",
+      "location": "Kolkata"
+    },
+    {
+      "id": 117,
+      "name": "Ramesh Yadav",
+      "email": "ramesh@gmail.com",
+      "location": "Kolkata"
+    },
+    {
+      "id": 119,
+      "name": "Pooja Bhat",
+      "email": "pooja@gmail.com",
+      "location": "Kolkata"
+    },
+    {
+      "id": 121,
+      "name": "Jatin Malhotra",
+      "email": "jatin@gmail.com",
+      "location": "Lucknow"
+    },
+    {
+      "id": 123,
+      "name": "Neha Sharma",
+      "email": "neha@gmail.com",
+      "location": "Pune"
+    },
+    {
+      "id": 125,
+      "name": "Rajeev Kapoor",
+      "email": "rajeev@gmail.com",
+      "location": "Hyderabad"
+    },
+    {
+      "id": 127,
+      "name": "Seema Nair",
+      "email": "seema@gmail.com",
+      "location": "Hyderabad"
+    },
+    {
+      "id": 129,
+      "name": "Aman Tiwari",
+      "email": "aman@gmail.com",
+      "location": "Pune"
+    }
+  ],
+  "users": [
+    {
+      "id": 102,
+      "name": "Aryaman Patra",
+      "email": "aryaman@gmail.com",
+      "orders": 9
+    },
+    {
+      "id": 104,
+      "name": "Isha Rane",
+      "email": "isha@gmail.com",
+      "orders": 9
+    },
+    {
+      "id": 106,
+      "name": "Vivek Thakur",
+      "email": "vivek@gmail.com",
+      "orders": 10
+    },
+    {
+      "id": 108,
+      "name": "Kiran Dey",
+      "email": "kiran@gmail.com",
+      "orders": 8
+    },
+    {
+      "id": 110,
+      "name": "Sneha Kulkarni",
+      "email": "sneha@gmail.com",
+      "orders": 3
+    },
+    {
+      "id": 112,
+      "name": "Varun Saxena",
+      "email": "varun@gmail.com",
+      "orders": 6
+    },
+    {
+      "id": 114,
+      "name": "Nidhi Chauhan",
+      "email": "nidhi@gmail.com",
+      "orders": 2
+    },
+    {
+      "id": 116,
+      "name": "Alok Gupta",
+      "email": "alok@gmail.com",
+      "orders": 5
+    },
+    {
+      "id": 118,
+      "name": "Rekha Shetty",
+      "email": "rekha@gmail.com",
+      "orders": 5
+    },
+    {
+      "id": 120,
+      "name": "Naman Mehra",
+      "email": "naman@gmail.com",
+      "orders": 7
+    },
+    {
+      "id": 122,
+      "name": "Priya Sethi",
+      "email": "priya@gmail.com",
+      "orders": 8
+    },
+    {
+      "id": 124,
+      "name": "Saurabh Bansal",
+      "email": "saurabh@gmail.com",
+      "orders": 7
+    },
+    {
+      "id": 126,
+      "name": "Deepika Ghosh",
+      "email": "deepika@gmail.com",
+      "orders": 4
+    },
+    {
+      "id": 128,
+      "name": "Yuvraj Chauhan",
+      "email": "yuvraj@gmail.com",
+      "orders": 8
+    },
+    {
+      "id": 130,
+      "name": "Tanya Paul",
+      "email": "tanya@gmail.com",
+      "orders": 9
+    }
+  ]
+}
