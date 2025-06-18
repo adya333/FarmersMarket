@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AgriBazaar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Scripts -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            const backgrounds = {
+                farmer: "url('https://images.unsplash.com/photo-1623211269755-569fec0536d2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+                user: "url('https://images.unsplash.com/photo-1568647383303-475fbdaffbeb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+                admin: "url('https://images.unsplash.com/photo-1665072204431-b3ba11bd6d06?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
+            };
+
+            const defaultBg = "url('https://images.unsplash.com/photo-1620200423727-8127f75d7f53?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')";
+
+
+            $(".nav-link").click(function () {
+                let target = $(this).data("target");
+                $(".page-section").addClass("d-none");
+                $("#" + target).removeClass("d-none");
+            });
+            $(".service-btn").hover(function () {
+                let role = $(this).data("role");
+                $("#services").css("background-image", backgrounds[role]);
+            },
+                function () {
+                    $("#services").css("background-image", defaultBg);
+                }
+            );
+        });
+    </script>
+    <style>
+        .navbar-custom {
+            background-color: #208a25;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+        }
+
+        .footer {
+            background-color: #dcdcdc;
+            color: black;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        #home {
+            
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        #services {
+            background-image: url('https://images.unsplash.com/photo-1620200423727-8127f75d7f53?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            min-height: 100vh;
+            padding: 100px 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .service-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid #fff;
+            color: white;
+            padding: 15px 30px;
+            margin: 20px;
+            font-size: 18px;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .service-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            color: black;
+        }
+
+        .service-description {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .service-btn:hover+.service-description {
+            opacity: 1;
+            max-height: 100px;
+        }
+
+        #about {
+            background-image: url('https://images.unsplash.com/photo-1483871788521-4f224a86e166?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            min-height: 100vh;
+            padding: 100px 30px;
+            color: white;
+            text-shadow: 1px 1px 4px #000;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .quote {
+            font-size: 2.2rem;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        #customH1 {
+            font-size: 3rem;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AgriBazaar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navItems">
+                <span class="navbar-toggler-icon bg-light"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navItems">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" data-target="home" href="#Home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" data-target="services" href="#Services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" data-target="about" href="#AboutUs">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <!-- Home -->
+    <div id="home" class="page-section">
+
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                    class="active"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-2" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-3" class="d-block w-100" alt="Slide 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+        <h1 id="customH1">Welcome to AgriBazaar</h1>
+        <div class="quote">"To forget how to dig the earth and tend the soil is to forget ourselves." – Gandhi</div>
+        <div class="quote">"The farmer has to be an optimist or he wouldn’t still be a farmer." – Will Rogers</div>
+        <div class="quote">"Agriculture is the most healthful, most useful and most noble employment of man." –
+            George Washington</div>
+    </div>
+    <!-- Service -->
+    <div id="services" class="page-section d-none">
+        <h2>Our Services</h2>
+        <p>Choose your role to get started</p>
+
+        <div class="d-flex flex-column align-items-center">
+            <div>
+                <button class="service-btn" data-role="farmer">Farmer</button>
+                <div class="service-description">Have products to sell? Register as a farmer now.</div>
+            </div>
+            <div>
+                <button class="service-btn" data-role="user">User</button>
+                <div class="service-description">Looking for fresh produce? Sign up as a user!</div>
+            </div>
+            <div>
+                <button class="service-btn" data-role="admin">Admin</button>
+                <div class="service-description">Monitor activity and manage users as admin.</div>
+            </div>
+        </div>
+    </div>
+    <!-- About us -->
+    <div id="about" class="page-section d-none">
+        <div class="container">
+            <h2>About AgriBazaar</h2>
+            <p>
+                AgriBazaar is an online marketplace that bridges the gap between farmers and buyers. Whether you're a
+                farmer looking to list your fresh produce or a customer searching for quality goods, our platform
+                ensures a seamless experience. Our mission is to empower farmers and provide users with transparent,
+                direct access to farm products.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <p>Contact: agribazaar@email.com | 📞 +91-9876543210</p>
+        </div>
+    </footer>
+</body>
+
+</html>
