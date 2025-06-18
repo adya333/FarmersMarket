@@ -1,221 +1,253 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Farmer's Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Farmer's Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
 
-
-
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .sidebar {
-      height: 100vh;
-      background-color: #343a40;
-      color: white;
-    }
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      display: block;
-    }
-    .sidebar a:hover {
-      background-color: #495057;
-    }
-    .card{
-        background-color: whitesmoke;
-        
-    }
-  </style>
-</head>
-<body>
-
-<div class="container-fluid">
-  <div class="row">
-
-    <nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="logo" src="../asessts/logo.jpg" alt=""></a>
-
-    <!-- Toggler for small screens -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar content -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <!-- Left-aligned links -->
-      <div class="navbar-nav">
-        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="../index.html">Dashboard</a>
-        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="./Orders/index.html">Orders</a>
-        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Inventory</a>
-        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Products</a>
-        <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#">Payments</a>
-       
-      </div>
-
-      <!-- Right-aligned profile image -->
-      <div class="ms-auto d-flex align-items-center">
-        <img src="../asessts/profile.jpg" alt="Profile" class="rounded-circle" width="40" height="40">
-      </div>
-    </div>
-  </div>
-</nav>
-
-
-    <!-- Main Content -->
-    <main class="container py-4">
-  <div class="text-center">
-    <h2>Welcome, Farmer</h2>
-    <p>!!Rating of the farmer !!</p>
-  </div>
-
-  <!-- Summary Cards -->
-  <div class="row g-4 mb-4 justify-content-center">
-    <div class="col-md-2 over" >
-      <div class="card cardov">
-        <div class="card-body text-center">
-          <h5 class="card-title" style="color: green;">Orders Today</h5>
-          <p class="card-text fs-4"><i class="bi bi-arrow-up up-icon"></i>3       <i class="bi bi-arrow-down down-icon rateAr"></i>0</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="card cardov">
-        <div class="card-body text-center">
-          <h5 class="card-title" style="color: green;">Revenue</h5>
-          <p class="card-text fs-4">₹2,500</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2 over" >
-      <div class="card cardov">
-        <div class="card-body text-center">
-          <h5 class="card-title" style="color: green;">Active Listings</h5>
-          <p class="card-text fs-4">5</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Recent Orders -->
-  <div class="card mb-5 w-75 mx-auto">
-  <div class="card-header bg-success text-white">
-    Recent Orders
-  </div>
-  <div class="card-body">
-    <table class="table table-hover text-center">
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="orderTable">
-        <tr>
-          <td>#001</td>
-          <td>Tomato</td>
-          <td>10kg</td>
-          <td>₹500</td>
-          <td><span class="badge bg-success">Delivered</span></td>
-        </tr>
-        <tr>
-          <td>#002</td>
-          <td>Potato</td>
-          <td>20kg</td>
-          <td>₹700</td>
-          <td><span class="badge bg-warning text-dark">Pending</span></td>
-        </tr>
-        <tr>
-          <td>#003</td>
-          <td>Milk</td>
-          <td>15L</td>
-          <td>₹1,300</td>
-          <td><span class="badge bg-success">Delivered</span></td>
-        </tr>
-
-        <!-- Hidden initially -->
-        <tr class="extra-order d-none">
-          <td>#004</td>
-          <td>Onion</td>
-          <td>12kg</td>
-          <td>₹480</td>
-          <td><span class="badge bg-success">Delivered</span></td>
-        </tr>
-        <tr class="extra-order d-none">
-          <td>#005</td>
-          <td>Carrot</td>
-          <td>8kg</td>
-          <td>₹320</td>
-          <td><span class="badge bg-warning text-dark">Pending</span></td>
-        </tr>
-        <tr class="extra-order d-none">
-          <td>#006</td>
-          <td>Curd</td>
-          <td>5L</td>
-          <td>₹300</td>
-          <td><span class="badge bg-danger">Cancelled</span></td>
-        </tr>
-        <tr class="extra-order d-none">
-          <td>#007</td>
-          <td>Cabbage</td>
-          <td>6kg</td>
-          <td>₹180</td>
-          <td><span class="badge bg-success">Delivered</span></td>
-        </tr>
-        <tr class="extra-order d-none">
-          <td>#008</td>
-          <td>Paneer</td>
-          <td>2kg</td>
-          <td>₹500</td>
-          <td><span class="badge bg-success">Delivered</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="text-center">
-      <button class="btn btn-outline-primary" id="toggleBtn" onclick="toggleOrders()">View More</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function toggleOrders() {
-    const rows = document.querySelectorAll('.extra-order');
-    const btn = document.getElementById('toggleBtn');
-    let isHidden = rows[0].classList.contains('d-none');
-
-    rows.forEach((row, index) => {
-      if (isHidden && index < 5) {
-        row.classList.remove('d-none'); // show 5 more
-      } else if (!isHidden) {
-        row.classList.add('d-none'); // hide all
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background-color: #f8f9fa;
       }
-    });
+      /* The sidebar styles are not strictly needed here as the navbar is used, 
+         but keeping them for consistency with the original snippet's style block */
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+        color: white;
+      }
+      .sidebar a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+      }
+      .sidebar a:hover {
+        background-color: #495057;
+      }
+      .card {
+        background-color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="./index.html"
+              ><img class="logo" src="../asessts/logo.jpg" alt=""
+            /></a>
 
-    btn.textContent = isHidden ? 'View Less' : 'View More';
-  }
-</script>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a
+                  class="nav-link px-3 py-2 mx-1 fs-7 fw-bold"
+                  aria-current="page"
+                  href="./index.html"
+                  >Dashboard</a
+                >
+                <a
+                  class="nav-link px-3 py-2 mx-1 fs-7 fw-bold"
+                  href="./Orders/index.html"
+                  >Orders</a
+                >
+                <a
+                  class="nav-link px-3 py-2 mx-1 fs-7 fw-bold"
+                  href="./inventory/my-inventory.html"
+                  >Inventory</a
+                >
+                <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#"
+                  >Products</a
+                >
+                <a class="nav-link px-3 py-2 mx-1 fs-7 fw-bold" href="#"
+                  >Payments</a
+                >
+              </div>
 
-  
-</main>
+              <div class="ms-auto d-flex align-items-center">
+                <img
+                  src="../asessts/profile.jpg"
+                  alt="Profile"
+                  class="rounded-circle"
+                  width="40"
+                  height="40"
+                />
+              </div>
+            </div>
+          </div>
+        </nav>
 
-  </div>
-</div>
+        <main class="container py-4">
+          <div class="text-center">
+            <h2>Welcome, Farmer</h2>
+            <p>!!Rating of the farmer !!</p>
+          </div>
 
-<!-- Bootstrap JS (for responsive behavior) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+          <div class="row g-4 mb-4 justify-content-center">
+            <div class="col-md-2 over">
+              <div class="card cardov">
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color: green">Orders Today</h5>
+                  <p class="card-text fs-4">
+                    <i class="bi bi-arrow-up up-icon"></i>3
+                    <i class="bi bi-arrow-down down-icon rateAr"></i>0
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card cardov">
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color: green">Revenue</h5>
+                  <p class="card-text fs-4">₹2,500</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 over">
+              <div class="card cardov">
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color: green">
+                    Active Listings
+                  </h5>
+                  <p class="card-text fs-4">5</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-</body>
+          <div class="card mb-5 w-75 mx-auto">
+            <div class="card-header bg-success text-white">Recent Orders</div>
+            <div class="card-body">
+              <table class="table table-hover text-center">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="orderTable">
+                  <tr>
+                    <td>#001</td>
+                    <td>Tomato</td>
+                    <td>10kg</td>
+                    <td>₹500</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+                  <tr>
+                    <td>#002</td>
+                    <td>Potato</td>
+                    <td>20kg</td>
+                    <td>₹700</td>
+                    <td>
+                      <span class="badge bg-warning text-dark">Pending</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#003</td>
+                    <td>Milk</td>
+                    <td>15L</td>
+                    <td>₹1,300</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+
+                  <tr class="extra-order d-none">
+                    <td>#004</td>
+                    <td>Onion</td>
+                    <td>12kg</td>
+                    <td>₹480</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+                  <tr class="extra-order d-none">
+                    <td>#005</td>
+                    <td>Carrot</td>
+                    <td>8kg</td>
+                    <td>₹320</td>
+                    <td>
+                      <span class="badge bg-warning text-dark">Pending</span>
+                    </td>
+                  </tr>
+                  <tr class="extra-order d-none">
+                    <td>#006</td>
+                    <td>Curd</td>
+                    <td>5L</td>
+                    <td>₹300</td>
+                    <td><span class="badge bg-danger">Cancelled</span></td>
+                  </tr>
+                  <tr class="extra-order d-none">
+                    <td>#007</td>
+                    <td>Cabbage</td>
+                    <td>6kg</td>
+                    <td>₹180</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+                  <tr class="extra-order d-none">
+                    <td>#008</td>
+                    <td>Paneer</td>
+                    <td>2kg</td>
+                    <td>₹500</td>
+                    <td><span class="badge bg-success">Delivered</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="text-center">
+                <button
+                  class="btn btn-outline-primary"
+                  id="toggleBtn"
+                  onclick="toggleOrders()"
+                >
+                  View More
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            function toggleOrders() {
+              const rows = document.querySelectorAll(".extra-order");
+              const btn = document.getElementById("toggleBtn");
+              let isHidden = rows[0].classList.contains("d-none");
+
+              rows.forEach((row, index) => {
+                if (isHidden && index < 5) {
+                  row.classList.remove("d-none"); // show 5 more
+                } else if (!isHidden) {
+                  row.classList.add("d-none"); // hide all
+                }
+              });
+
+              btn.textContent = isHidden ? "View Less" : "View More";
+            }
+          </script>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
