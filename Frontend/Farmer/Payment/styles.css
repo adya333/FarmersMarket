@@ -1,4 +1,4 @@
-nav{
+/* nav{
     background-color: green;
     padding: 0;
 }
@@ -24,13 +24,13 @@ nav{
     border-radius: 50%;
     object-fit: contain;
 
-}
-.tbhead{
-    background-color: green;
-    color: white;
+} */
+.tbhead {
+  background-color: green;
+  color: white;
 }
 /* Card very well working */
- /* .card {
+/* .card {
   background-color: rgb(237, 250, 237);
   border: none;
   border-radius: 15px;
@@ -57,8 +57,6 @@ nav{
   font-weight: bold;
   color: #064f06;
 } */
-
-
 
 .card {
   background-color: rgb(226, 248, 226);
@@ -99,4 +97,3 @@ nav{
   margin-right: 0.3rem;
   padding: 0.4em 0.6em;
 }
-

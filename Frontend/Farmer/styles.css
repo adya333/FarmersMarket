@@ -1,114 +1,41 @@
-nav{
-    background-color: green;
-    padding: 0;
+nav {
+  background-color: green;
+  padding: 0;
 }
-.pgB{
-    background-color: white;
+.pgB {
+  background-color: white;
 }
-.nav-link{
-    padding-right: 20px;
-    padding-left: 20px;
-    border-radius: 20px;
-    color: white;
+.nav-link {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 20px;
+  color: white;
 }
-.nav-link:hover{
-    background-color: white;
-    color: green;
-    border-radius: 20px;
-
+.nav-link:hover {
+  background-color: white;
+  color: green;
+  border-radius: 20px;
 }
-.logo{
-    width: 40x;
-    height: 40px;
-    padding: 0;
-    border-radius: 50%;
-    object-fit: contain;
-
+.logo {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  object-fit: contain;
 }
-.up-icon{
-    font-weight: bold;
-    color: green;
+.up-icon {
+  font-weight: bold;
+  color: green;
 }
-.down-icon{
-    color: red;
+.down-icon {
+  color: red;
 }
-.rateAr{
-color: red;
+.rateAr {
+  color: red;
 }
-
 .cardov .card-title {
   font-size: 1rem;
   font-weight: 600;
   color: #1c4b1c;
   margin-bottom: 0.3rem;
-}
-
-.cardov .card-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #064f06;
-}
-
-/* Up and down icons */
-.up-icon {
-  color: green;
-  font-size: 1.2rem;
-  vertical-align: middle;
-  margin-right: 6px;
-}
-
-.down-icon {
-  color: red;
-  font-size: 1.2rem;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-.cardov .card-subtext {
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.cardov .text-success {
-  color: #198754 !important; /* Bootstrap green */
-}
-
-.cardov .text-warning {
-  color: #ffc107 !important; /* Bootstrap yellow */
-}
-
-.cardov .text-danger {
-  color: #dc3545 !important; /* Bootstrap red */
-}
-
-
-
-
-.dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.cardov {
-  border: 1px solid #cdeccd;
-  border-radius: 12px;
-  background-color:rgb(226, 248, 226);
-  transition: all 0.3s ease;
-  min-height: 160px;
-  box-shadow: 0 2px 6px rgba(2, 93, 2, 0.05);
-}
-
-.cardov:hover {
-  background-color: white;
-  box-shadow: 0 0 20px rgba(8, 116, 8, 0.3);
-}
-
-.card-body h4 {
-  font-size: 1.6rem;
-}
-
-.card-body span {
-  font-size: 0.85rem;
 }

@@ -1,0 +1,320 @@
+:root {
+  --primary-color: #4caf50; /* Green for success/primary actions */
+  --secondary-color: #2196f3; /* Blue for info/secondary */
+  --text-color: #333;
+  --light-gray: #f8f9fa; /* Lighter background for a cleaner look */
+  --border-color: #e0e0e0; /* Softer border */
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* More pronounced but soft shadow */
+  --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Nicer hover effect */
+  /* Added from inventory styles for consistency */
+  --primary-green: #208a25;
+  --dark-green: #186b1c;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --animation-speed: 0.3s;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* --- Navbar Styles (from inventory) --- */
+/* .navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  margin-bottom: 20px;
+} */
+
+/* .navbar-brand .logo {
+  height: 50px; 
+  width: auto;
+} */
+
+/* .navbar-nav .nav-link {
+  color: #333;
+  transition: color var(--animation-speed) ease,
+    background-color var(--animation-speed) ease;
+  border-radius: 6px;
+} */
+/* 
+.navbar-nav .nav-link:hover {
+  color: var(--primary-green);
+  background-color: rgba(
+    32,
+    138,
+    37,
+    0.05
+  ); 
+} */
+
+/* .navbar-nav .nav-link.active {
+  color: #fff;
+  background-color: var(--primary-green);
+  font-weight: bold;
+} */
+/* 
+.navbar-toggler {
+  border: none;
+} */
+
+/* --- Main Content Area --- */
+.main-content {
+  flex-grow: 1;
+  padding: 30px; /* Increased padding */
+  background-color: white;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: var(--card-shadow); /* Consistent shadow */
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all var(--animation-speed) ease-in-out;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-header h2 {
+  margin: 0;
+  font-size: 2.2em; /* Slightly larger heading */
+  color: #2c3e50; /* Darker, more professional heading color */
+}
+
+.user-info {
+  font-size: 1.1em;
+  color: #666;
+}
+
+/* --- Product Page Specific Styles --- */
+.product-page-controls {
+  display: flex;
+  justify-content: flex-start; /* Align filters to the start */
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px; /* Spacing between controls */
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-bar,
+.filter-dropdown {
+  padding: 12px 18px; /* Larger padding for better feel */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus,
+.filter-dropdown:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25); /* Bootstrap-like focus glow */
+}
+
+.product-list-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(220px, 1fr)
+  ); /* Smaller cards, more responsive */
+  gap: 20px; /* Reduced gap for more compact look */
+  padding-top: 10px;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 12px; /* More rounded */
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* For potential badges or overlays */
+}
+
+.product-card:hover {
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: var(--hover-shadow);
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px; /* Fixed height for consistency */
+  object-fit: cover;
+  border-bottom: 1px solid var(--border-color);
+  border-top-left-radius: 12px; /* Rounded corners for image top */
+  border-top-right-radius: 12px;
+}
+
+.product-info {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.product-info h3 {
+  margin-top: 0;
+  margin-bottom: 5px; /* Reduced margin */
+  font-size: 1.2em; /* Slightly smaller for compact card */
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Truncate long names */
+}
+
+.product-info p {
+  margin-bottom: 3px; /* Reduced margin */
+  font-size: 0.9em; /* Slightly smaller text */
+  color: #777;
+}
+
+/* Added style for farmer name */
+.product-info .farmer-name {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 8px; /* Space below farmer name */
+  font-weight: 500; /* Slightly bolder */
+}
+
+.product-price {
+  font-size: 1.1em; /* Slightly smaller price */
+  font-weight: bold;
+  color: var(--primary-green); /* Use primary green for price */
+  margin-bottom: 8px;
+}
+
+.product-status {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.8em; /* Smaller status text */
+  display: inline-block;
+  margin-top: 5px;
+  text-transform: capitalize; /* Make status text look nicer */
+}
+
+.status-active {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+.status-inactive {
+  background-color: #ffebee;
+  color: #f44336;
+}
+.status-low_stock {
+  background-color: #fffde7;
+  color: #ffc107; /* Brighter yellow */
+  border: 1px solid #ffc107;
+}
+.status-out_of_stock {
+  background-color: #fce4ec;
+  color: #dc3545; /* Bootstrap danger red */
+}
+
+.no-products-message {
+  text-align: center;
+  grid-column: 1 / -1; /* Span across all columns */
+  padding: 50px;
+  color: #666;
+  font-size: 1.2em;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .main-content {
+    padding: 20px;
+  }
+  .main-header h2 {
+    font-size: 1.8em;
+  }
+  .product-list-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .product-page-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filters {
+    width: 100%;
+    justify-content: center;
+  }
+  .search-bar,
+  .filter-dropdown {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 15px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .main-header h2 {
+    font-size: 1.6em;
+  }
+  .navbar {
+    padding: 5px 0; /* Smaller padding for mobile navbar */
+  }
+  .navbar-brand .logo {
+    height: 40px; /* Smaller logo for mobile */
+  }
+  .product-list-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(180px, 1fr)
+    ); /* Even smaller cards */
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list-grid {
+    grid-template-columns: 1fr; /* Single column for very small screens */
+  }
+  .product-card img {
+    height: 120px; /* Adjust image height for single column */
+  }
+  .product-info {
+    padding: 12px;
+  }
+  .product-info h3 {
+    font-size: 1.1em;
+  }
+  .product-info p {
+    font-size: 0.85em;
+  }
+  .product-price {
+    font-size: 1em;
+  }
+  .product-status {
+    font-size: 0.75em;
+  }
+  .product-info .farmer-name {
+    /* Adjust for smaller screens */
+    font-size: 0.8em;
+  }
+}
