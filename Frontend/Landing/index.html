@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FarmFresh - Grow with Confidence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5fff5;
+    }
+
+    nav {
+      background-color: green;
+    }
+
+    .nav-link,
+    .navbar-brand {
+      color: white !important;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: #d4f7d4 !important;
+    }
+
+    .carousel-caption {
+      background: rgba(0, 100, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    .carousel-caption h5 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #f8f9fa;
+    }
+
+    .carousel-caption p {
+      font-size: 1rem;
+      color: #e9ecef;
+    }
+
+    .tagline {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      color: #145a32;
+      margin: 2rem 0;
+    }
+
+    .btn-green {
+      background-color: green;
+      color: white;
+    }
+
+    .btn-green:hover {
+      background-color: white;
+      color: green;
+      border: 2px solid green;
+      
+    }
+
+    footer {
+      background-color: #198754;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <img src="../asessts/logo.jpg" style="width:50px; height:50px;border-radius:50%;float:left">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Products</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Tagline -->
+  <div class="container">
+    <p class="tagline">Empowering Farmers. Enriching Lives.</p>
+  </div>
+
+  <!-- Carousel -->
+  <div id="farmCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="overlay"></div>
+        <img src="../asessts/coffee.jpg" class="d-block w-100" alt="Organic Farming" style="height: 450px; object-fit: cover; opacity:0.7">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Start Strong, Sip Local</h5>
+          <p>Grown in the highlands, roasted with heart. Taste the richness of homegrown coffee.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="overlay"></div>
+        <img src="../asessts/erries.jpg" class="d-block w-100" alt="Farmer Support" style="height: 450px; object-fit: cover;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Sweetness That Grows Naturally</h5>
+          <p>From farm to basket fresh, vibrant berries straight from local soil.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="overlay"></div>
+        <img src="../asessts/veggies.jpg" class="d-block w-100" alt="Healthy Food" style="height: 450px; object-fit: cover;">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Fresh from the Fields</h5>
+          <p>Nourish your family with clean, crisp, and chemical-free farm vegetables.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#farmCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#farmCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="container text-center mb-5">
+    <h3 class="mb-3 text-success">Join the Green Revolution</h3>
+    <p class="mb-4">Be a part of our growing network of empowered farmers and eco-conscious customers.</p>
+    <a href="#" class="btn btn-green btn-lg">Get Started</a>
+  </div>
+
+
+
+
+<!-- Benefits Section for Users -->
+<section class="benefits-section py-5">
+  <div class="container">
+    <h2 class="text-center section-title text-success mb-5">Benefits for Users</h2>
+    <div class="row text-center g-4">
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100">
+          <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Fresh Produce">
+          <h5>Fresh Farm Produce</h5>
+          <p>Direct access to fresh, organic, and seasonal produce delivered straight from the farm to your doorstep.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100 shadow-sm">
+          <img src="https://cdn-icons-png.flaticon.com/512/2910/2910791.png" alt="Transparency">
+          <h5>Transparent Pricing</h5>
+          <p>Know exactly what you're paying for – no middlemen, fair pricing, and full traceability of products.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100 shadow-sm">
+          <img src="https://cdn-icons-png.flaticon.com/512/4151/4151711.png" alt="Quality Assurance">
+          <h5>Quality Assurance</h5>
+          <p>Only the best products make it through our quality checks, ensuring customer satisfaction every time.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section for Farmers -->
+<section class="benefits-section py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center section-title text-success mb-5">Benefits for Farmers</h2>
+    <div class="row text-center g-4">
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100 shadow-sm">
+          <img src="https://cdn-icons-png.flaticon.com/512/2230/2230555.png" alt="Fair Prices">
+          <h5>Fair Pricing</h5>
+          <p>Eliminate middlemen and get the true value for your hard work with transparent and direct selling.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100 shadow-sm">
+          <img src="https://cdn-icons-png.flaticon.com/512/1611/1611318.png" alt="Market Access">
+          <h5>Wider Market Access</h5>
+          <p>Reach more customers without leaving your farm — online presence gives you visibility and growth.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="benefit-card h-100 shadow-sm">
+          <img src="https://cdn-icons-png.flaticon.com/512/3594/3594509.png" alt="Support">
+          <h5>Tools & Support</h5>
+          <p>Get insights, crop management tips, and customer feedback to improve your production and delivery.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="unique-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-4 text-success fw-bold">Our Unique Offerings</h2>
+    <p class="text-center text-muted mb-5">Discover rare and regionally exclusive products directly from farmers across India.</p>
+
+    <div id="uniqueCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+          <!---->
+
+           
+
+
+
+            <!---->
+            <div class="card unique-card">
+              <img src="../asessts/blackrice.jpg" class="card-img-top" alt="Black Rice">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Organic Black Rice</h5>
+                <p class="card-text small text-muted">From Manipur hills.</p>
+              </div>
+            </div>
+            <div class="card unique-card">
+              <img src="../asessts/purplecarrots.webp" class="card-img-top" alt="Purple Carrots">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Purple Carrots</h5>
+                <p class="card-text small text-muted">Native to Punjab fields.</p>
+              </div>
+            </div>
+            <div class="card unique-card">
+              <img src="../asessts/himalayanAPPLS.webp" class="card-img-top" alt="Himalayan Apples">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Himalayan Apples</h5>
+                <p class="card-text small text-muted">Fresh from Himachal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <div class="card unique-card">
+              <img src="../asessts/lakadongTurmeric.jpg" class="card-img-top" alt="Lakadong Turmeric">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Lakadong Turmeric</h5>
+                <p class="card-text small text-muted">High curcumin from Meghalaya.</p>
+              </div>
+            </div>
+            <div class="card unique-card">
+              <img src="../asessts/nagachilli.jpg_large" class="card-img-top" alt="Naga King Chili">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Naga King Chili</h5>
+                <p class="card-text small text-muted">Fiery spice from Nagaland.</p>
+              </div>
+            </div>
+            <div class="card unique-card">
+              <img src="../asessts/blackgralic.jpg" class="card-img-top" alt="Black Garlic">
+              <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Aged Black Garlic</h5>
+                <p class="card-text small text-muted">Immunity booster from Gujarat.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#uniqueCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#uniqueCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+<!--TESTIMONIALS-->
+<section class="testimonial-section py-5">
+  <div class="container">
+    <h2 class="text-center section-title mb-5">What Farmers Say About Us</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active">
+          <div class="testimonial-slide" style="background-image: url('../asessts/farmer1.jpg');">
+            <div class="testimonial-overlay">
+              <h5 class="fw-bold">Shambhu Nath</h5>
+              <p class="text-muted mb-2">Retired Farmer, Uttar Pradesh</p>
+              <p>“This platform gave me a new lease on life. I never thought my traditional farming methods would reach so many people. Now, my produce is valued and sold across the country.”</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-item">
+          <div class="testimonial-slide" style="background-image: url('../asessts/womanPoultry.jpg');">
+            <div class="testimonial-overlay">
+              <h5 class="fw-bold">Avantika Mishra</h5>
+              <p class="text-muted mb-2">Young Poultry Farmer, Odisha</p>
+              <p>“As a young woman trying to scale our poultry business, I found everything I needed here — buyers, support, and confidence. My family now depends on what started as a dream!”</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-item">
+          <div class="testimonial-slide" style="background-image: url('../asessts/nri.jpg');">
+            <div class="testimonial-overlay">
+              <h5 class="fw-bold">Harkirat Singh</h5>
+              <p class="text-muted mb-2">Returned NRI Farmer, Punjab</p>
+              <p>“After years abroad, I came back to Punjab and started my farming business again. This platform gave me the exposure and network to succeed on my own land.”</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 FarmFresh. All rights reserved.
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
