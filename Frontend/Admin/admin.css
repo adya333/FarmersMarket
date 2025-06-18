@@ -9,7 +9,9 @@ body {
 .sidebar {
   background-color: #208a25;
   min-height: 100vh;
+  min-width: 250px;
   color: white;
+  position: fixed;
   padding: 0 !important;
 }
 
@@ -24,9 +26,10 @@ body {
   color: white;
   text-decoration: none;
   display: block;
-  padding: 15px;
+  padding: 16px;
   transition: background-color 0.2s ease;
-  font-size: 16px;
+  font-size: 18px;
+  text-align: center;
 }
 
 .sidebar a:hover {

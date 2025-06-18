@@ -1,0 +1,3 @@
+# Backup artifacts
+*.tar.gz
+/backups/
