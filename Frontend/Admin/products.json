@@ -1,0 +1,137 @@
+[
+  {
+    "product_id": 200,
+    "name": "Tomatoes",
+    "category": "fruits",
+    "farmer": "Neha Singh",
+    "price": 99.19,
+    "quantity": 31,
+    "status": "in-stock"
+  },
+  {
+    "product_id": 201,
+    "name": "Wheat",
+    "category": "others",
+    "farmer": "Amit Patel",
+    "price": 29.84,
+    "quantity": 55,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 202,
+    "name": "Mangoes",
+    "category": "fruits",
+    "farmer": "Raj Sharma",
+    "price": 67.82,
+    "quantity": 11,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 203,
+    "name": "Rice",
+    "category": "others",
+    "farmer": "Deepak Yadav",
+    "price": 37.39,
+    "quantity": 93,
+    "status": "in-stock"
+  },
+  {
+    "product_id": 204,
+    "name": "Bananas",
+    "category": "grains",
+    "farmer": "Amit Patel",
+    "price": 83.33,
+    "quantity": 53,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 205,
+    "name": "Carrots",
+    "category": "grains",
+    "farmer": "Neha Singh",
+    "price": 77.7,
+    "quantity": 21,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 206,
+    "name": "Onions",
+    "category": "fruits",
+    "farmer": "Amit Patel",
+    "price": 73.88,
+    "quantity": 23,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 207,
+    "name": "Potatoes",
+    "category": "fruits",
+    "farmer": "Amit Patel",
+    "price": 21.28,
+    "quantity": 79,
+    "status": "in-stock"
+  },
+  {
+    "product_id": 208,
+    "name": "Oranges",
+    "category": "vegetables",
+    "farmer": "Sunita Rani",
+    "price": 44.78,
+    "quantity": 30,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 209,
+    "name": "Corn",
+    "category": "vegetables",
+    "farmer": "Amit Patel",
+    "price": 78.84,
+    "quantity": 82,
+    "status": "in-stock"
+  },
+  {
+    "product_id": 210,
+    "name": "Cabbage",
+    "category": "grains",
+    "farmer": "Neha Singh",
+    "price": 82.99,
+    "quantity": 29,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 211,
+    "name": "Apples",
+    "category": "fruits",
+    "farmer": "Deepak Yadav",
+    "price": 46.3,
+    "quantity": 36,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 212,
+    "name": "Beans",
+    "category": "grains",
+    "farmer": "Deepak Yadav",
+    "price": 98.46,
+    "quantity": 25,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 213,
+    "name": "Peas",
+    "category": "others",
+    "farmer": "Amit Patel",
+    "price": 21.47,
+    "quantity": 87,
+    "status": "out-of-stock"
+  },
+  {
+    "product_id": 214,
+    "name": "Sugarcane",
+    "category": "fruits",
+    "farmer": "Neha Singh",
+    "price": 88.6,
+    "quantity": 74,
+    "status": "in-stock"
+  }
+]
