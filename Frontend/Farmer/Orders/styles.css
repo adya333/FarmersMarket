@@ -1,4 +1,4 @@
-nav{
+/* nav{
     background-color: green;
     padding: 0;
 }
@@ -24,8 +24,8 @@ nav{
     border-radius: 50%;
     object-fit: contain;
 
-}
-thead.thcolor th{
-    background-color: green;
-    color: white;
+} */
+thead.thcolor th {
+  background-color: green;
+  color: white;
 }
