@@ -22,19 +22,7 @@ $(document).ready(function () {
             e.preventDefault();
             alert(error);
         } else {
-            $.ajax({
-                url: '/api/user/register', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    username: username,
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Registered!", res);
-                }
-            });
+            
         }
     });
 
@@ -46,18 +34,7 @@ $(document).ready(function () {
             e.preventDefault();
             alert("Invalid email format.");
         } else {
-            $.ajax({
-                url: '/api/user/login', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Logged in!", res);
-                }
-            });
+            
         }
 
     });

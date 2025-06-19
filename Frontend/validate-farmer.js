@@ -22,20 +22,8 @@ $(document).ready(function () {
             e.preventDefault();
             alert(error);
         } else {
-            window.location.href = "Farmer/index.html"
-            // $.ajax({
-            //     url: '/api/farmer/register', //Placeholder api, upto backend developer to set
-            //     method: 'POST',
-            //     data: {
-            //         username: username,
-            //         email: email,
-            //         password: password
-            //     },
-            //     contentType: "application/json",
-            //     success: function (res) {
-            //         console.log("Registered!", res);
-            //     }
-            // });
+            e.preventDefault
+            window.location.href = "../Farmer/index.html"
         }
     });
 
@@ -48,19 +36,7 @@ $(document).ready(function () {
             alert("Invalid email format.");
         } else {
             e.preventDefault();
-            window.location.href = "Farmer/index.html"
-            // $.ajax({
-            //     url: '/api/farmer/login', //Placeholder api, upto backend developer to set
-            //     method: 'POST',
-            //     data: {
-            //         email: email,
-            //         password: password
-            //     },
-            //     contentType: "application/json",
-            //     success: function (res) {
-            //         console.log("Logged in!", res);
-            //     }
-            // });
+            window.location.href = "../Farmer/index.html"
         }
 
     });
@@ -89,25 +65,6 @@ $(document).ready(function () {
         } else {
             alert
         }
-
-        // $.ajax({
-        //     url: "api/farmer/postProduct", //Placeholder api
-        //     method: "POST",
-        //     data: {
-        //         productName: productName,
-        //         category: category,
-        //         price: price,
-        //         stock: stock,
-        //         description: description
-        //     },
-        //     success: function (res) {
-        //         alert("Product posted successfully!");
-        //         $("#farmerProductForm")[0].reset(); 
-        //     },
-        //     error: function (xhr) {
-        //         alert("Error posting product: " + xhr.responseText);
-        //     }
-        // });
     });
 
 });
