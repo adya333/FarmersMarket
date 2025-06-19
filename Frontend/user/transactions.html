@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transactions - AgriBazaar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #4CAF50;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AgriBazaar</h1>
+    <nav>
+      <a href="ex.html">Home</a>
+      <a href="ex.html#products">Products</a>
+      <a href="ex.html#contact">Contact</a>
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Settings</a>
+        <div class="dropdown-content">
+          <a href="#">Profile</a>
+          <a href="transactions.html">Transactions</a>
+          <a href="#">Farmers</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Your Transactions</h2>
+    <table id="transactionsTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Address</th>
+          <th>Payment</th>
+          <th>Items</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Order rows will appear here -->
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AgriBazaar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const tbody = document.querySelector("#transactionsTable tbody");
+
+    if (orders.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5">No transactions found.</td></tr>`;
+    } else {
+      orders.forEach(order => {
+        const row = document.createElement("tr");
+
+        const itemsList = order.items.map(item => `${item.name} x${item.quantity}`).join(", ");
+
+        row.innerHTML = `
+          <td>${order.date}</td>
+          <td>${order.address}</td>
+          <td>${order.paymentType}</td>
+          <td>${itemsList}</td>
+          <td>₹${order.total}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+
+</body>
+</html>

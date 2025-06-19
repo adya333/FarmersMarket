@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - AgriBazaar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-2 p-0" id="sidebar-container"></div>
+
+      <!-- Main Content -->
+      <div class="col-md-10">
+        <div class="header d-flex justify-content-between align-items-center">
+          <button id="sidebarToggle" class="btn btn-outline-success d-md-none">☰</button>
+          <h4 class="m-0">Products</h4>
+          <button class="btn btn-sm btn-outline-success">Logout</button>
+        </div>
+
+        <!-- Products Section -->
+        <div class="container mt-4">
+            <!-- Filter Controls -->
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="text" id="productSearch" class="form-control" placeholder="Search by name, farmer, or category">
+                </div>
+                <div class="col-md-3">
+                    <select id="categoryFilter" class="form-select">
+                        <option value="">All Categories</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="grains">Grains</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="stockFilter" class="form-select">
+                        <option value="">All Stock Status</option>
+                        <option value="in-stock">In Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button id="resetProductFilters" class="btn btn-outline-success">Reset Filters</button>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-hover bg-white shadow-sm">
+                <thead class="table-success">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Farmer</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                    <!-- products data will be loaded here -->
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <nav aria-label="Orders pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" id="prevPage">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" id="nextPage">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Product Modal -->
+  <div class="modal fade" id="viewProductModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <strong>Product ID:</strong> <span id="viewProductId"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Name:</strong> <span id="viewProductName"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Farmer:</strong> <span id="viewProductFarmer"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Category:</strong> <span id="viewProductCategory"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Price:</strong> ₹<span id="viewProductPrice"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Quantity:</strong> <span id="viewProductQuantity"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Status:</strong> <span id="viewProductStatus" class="badge"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="deleteProductBtn">
+            <i class="bi bi-trash"></i> Delete Product
+          </button>
+          <button type="button" class="btn btn-warning" id="notifyFarmerBtn">
+            <i class="bi bi-bell"></i> Notify Farmer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Modal -->
+  <div class="modal fade" id="notifyModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Notify Farmer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Send restock notification to <span id="farmerName"></span> about <span id="productName"></span>?</p>
+          <textarea class="form-control mt-3" id="notificationMessage" 
+                   placeholder="Custom message (optional)"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmNotify">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <strong id="deleteProductName"></strong>?</p>
+          <p class="text-danger">This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

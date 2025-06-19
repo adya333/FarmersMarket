@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmers Market Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+<body>
+
+  <header id="home">
+    <h1>AgriBazaar</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="transactions.html">My Orders</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="viewCartBtn" onclick="goToCart()" style="display: none;" class="view-cart-btn">
+      🛒 View Cart
+    </button>
+  </header>
+
+  <div class="search-bar-container">
+    <input
+      type="text"
+      id="searchBox"
+      placeholder="Search for products..."
+      onkeyup="searchProducts()"
+    />
+  </div>
+
+  <section class="hero" id="products">
+    <h2>Fresh From Farm to Table</h2>
+    <p>Support local farmers and enjoy organic produce.</p>
+    <button>Shop Now</button>
+  </section>
+
+  <div class="filter-section">
+    <label for="category">Filter by Category:</label>
+    <select id="category" onchange="filterProducts()">
+      <option value="all">All</option>
+      <option value="vegetables">Vegetables</option>
+      <option value="fruits">Fruits</option>
+    </select>
+  </div>
+
+  <div class="product-grid">
+    <div class="product-card" data-category="vegetables">
+      <img src="https://www.lacostegardencentre.com/files/images/news/how-to-grow-tomatoes-1000x666-65ead2e671f5b_og.jpg" alt="Tomatoes" />
+      <h3>Tomatoes</h3>
+      <p>₹40/kg</p>
+      <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="vegetables">
+      <img src="https://imgk.timesnownews.com/story/carrots.gif?tr=w-400,h-300,fo-auto" alt="Carrots" />
+      <h3>Carrots</h3>
+      <p>₹30/kg</p>
+      <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="vegetables">
+      <img src="https://assetscdn1.paytm.com/images/catalog/product/H/HO/HOMPALAK-INDIANCREA887472B810B14/1563029597699_1..jpg?imwidth=540&impolicy=hq" alt="Spinach" />
+      <h3>Spinach</h3>
+      <p>₹20/bundle</p>
+      <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="fruits">
+      <img src="https://www.jiomart.com/images/product/original/590000005/apple-royal-gala-1-kg-product-images-o590000005-p590000005-0-202409171905.jpg?im=Resize=(1000,1000)" alt="Apples" />
+      <h3>Apples</h3>
+      <p>₹60/kg</p>
+      <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="fruits">
+      <img src="https://yummy-valley.com/wp-content/uploads/2024/03/elaichi-banana.webp" alt="Bananas" />
+      <h3>Bananas</h3>
+      <p>₹25/dozen</p>
+      <button class="add-to-cart-btn" onclick="addToCart(this)">Add to Cart</button>
+    </div>
+  </div>
+
+  <section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <p>Email: support@farmersmarkethub.com</p>
+    <p>Phone: +91241627920</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Farmers Market Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function filterProducts() {
+      const selectedCategory = document.getElementById("category").value;
+      const productCards = document.querySelectorAll(".product-card");
+
+      productCards.forEach(card => {
+        const category = card.getAttribute("data-category");
+        card.style.display = (selectedCategory === "all" || category === selectedCategory) ? "block" : "none";
+      });
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Backup artifacts
+*.tar.gz
+/backups/
+frontend_archive.log

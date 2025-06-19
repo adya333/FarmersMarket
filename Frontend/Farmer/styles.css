@@ -1,44 +1,41 @@
-nav{
-    background-color: green;
-    padding: 0;
+nav {
+  background-color: green;
+  padding: 0;
 }
-.pgB{
-    background-color: white;
+.pgB {
+  background-color: white;
 }
-.nav-link{
-    padding-right: 20px;
-    padding-left: 20px;
-    border-radius: 20px;
-    color: white;
+.nav-link {
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 20px;
+  color: white;
 }
-.nav-link:hover{
-    background-color: white;
-    color: green;
-    border-radius: 20px;
-
+.nav-link:hover {
+  background-color: white;
+  color: green;
+  border-radius: 20px;
 }
-.logo{
-    width: 40x;
-    height: 40px;
-    padding: 0;
-    border-radius: 50%;
-    object-fit: contain;
-
+.logo {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  object-fit: contain;
 }
-.up-icon{
-    font-weight: bold;
-    color: green;
+.up-icon {
+  font-weight: bold;
+  color: green;
 }
-.down-icon{
-    color: red;
+.down-icon {
+  color: red;
 }
-.rateAr{
-color: red;
+.rateAr {
+  color: red;
 }
-.cardov{
-    border: 2px green solid;
-}
-.cardov:hover{
-   border: none;
-  box-shadow: 0 0 19px rgba(8, 116, 8, 0.3);
+.cardov .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1c4b1c;
+  margin-bottom: 0.3rem;
 }

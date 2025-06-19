@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart - AgriBazaar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #208a25;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #4CAF50;
+      font-size: 1.8rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background-color: #208a25;
+      color: white;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    tfoot td {
+      font-weight: bold;
+      background-color: #f4f4f4;
+    }
+
+    .remove-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .remove-btn:hover {
+      background-color: #c62828;
+    }
+
+    .view-cart-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #208a25;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .view-cart-btn:hover {
+      background-color: #246b45;
+    }
+.cart-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 25px;
+  gap: 20px;
+}
+
+.total-info {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.proceed-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.proceed-btn:hover {
+  background-color: #2e7d32;
+}
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AgriBazaar</h1>
+    <nav>
+      <a href="ex.html">Home</a>
+      <a href="ex.html#products">Products</a>
+      <a href="transactions.html">My Orders</a>
+      <a href="ex.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Your Cart</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cartTableBody">
+        <!-- Cart items will appear here -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total Amount</td>
+          <td id="cartTotal">₹0</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="cart-footer">
+  <div class="total-info">Total: <span id="cartTotalRight">₹0</span></div>
+  <button class="proceed-btn" onclick="proceedToCheckout()">Proceed</button>
+</div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AgriBazaar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+    const tbody = document.getElementById("cartTableBody");
+    tbody.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const row = document.createElement("tr");
+
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>₹${item.price}</td>
+        <td>
+          <input 
+            type="number" 
+            min="1" 
+            value="${item.quantity}" 
+            onchange="updateQuantity(${index}, this.value)"
+            style="width: 60px; padding: 4px; text-align: center;"
+          />
+        </td>
+        <td id="item-total-${index}">₹${itemTotal}</td>
+        <td><button class="remove-btn" onclick="removeItem(${index})">Remove</button></td>
+      `;
+
+      tbody.appendChild(row);
+    });
+
+document.getElementById("cartTotal").textContent = `₹${total}`;
+document.getElementById("cartTotalRight").textContent = `₹${total}`;
+  }
+  function updateQuantity(index, newQuantity) {
+    const quantity = parseInt(newQuantity);
+    if (quantity < 1) return;
+
+    cart[index].quantity = quantity;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    renderCart();
+    function proceedToCheckout() {
+  window.location.href = "checkout.html";
+}
+
+
+  </script>
+  <script>
+function goHome() {
+  window.location.href = "ex.html"; // optionally scroll to section
+}
+</script>
+
+</body>
+</html>
