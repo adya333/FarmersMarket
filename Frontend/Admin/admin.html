@@ -31,36 +31,81 @@
               <div class="card bg-white shadow p-3 text-center">
                 <div class="card-icon mb-2">👨‍🌾</div>
                 <h5>Total Farmers</h5>
-                <h3>120</h3>
+                <h3>250</h3>
               </div>
             </div>
             <div class="col-md-3">
               <div class="card bg-white shadow p-3 text-center">
                 <div class="card-icon mb-2">🛒</div>
                 <h5>Total Buyers</h5>
-                <h3>85</h3>
+                <h3>1250</h3>
               </div>
             </div>
             <div class="col-md-3">
               <div class="card bg-white shadow p-3 text-center">
                 <div class="card-icon mb-2">📦</div>
                 <h5>Total Products</h5>
-                <h3>230</h3>
+                <h3>120</h3>
               </div>
             </div>
             <div class="col-md-3">
               <div class="card bg-white shadow p-3 text-center">
                 <div class="card-icon mb-2">📜</div>
                 <h5>Total Orders</h5>
-                <h3>55</h3>
+                <h3>2450</h3>
               </div>
             </div>
           </div>
 
           <!-- Analytics Section -->
           <div class="mt-5">
-            <h5 class="mb-3">Analytics Overview</h5>
-            <canvas id="ordersChart" height="100"></canvas>
+            <h4 class="mb-3">Analytics Overview</h5>
+            
+            <!-- Time Period Selector -->
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <select id="timePeriod" class="form-select">
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                  <option value="year">This Year</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Orders Chart -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h6 class="card-title">Order Trends</h6>
+                <canvas id="ordersChart" height="100"></canvas>
+              </div>
+            </div>
+
+            <!-- Top Performers Row -->
+            <div class="row">
+              <!-- Top Products -->
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h4 class="card-title">Top Selling Products</h6>
+                    <div id="topProducts" class="mt-3">
+                      <!-- Will be populated by JavaScript -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Top Farmers -->
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h4 class="card-title">Top Performing Farmers</h6>
+                    <div id="topFarmers" class="mt-3">
+                      <!-- Will be populated by JavaScript -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
