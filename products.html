@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - AgriBazaar</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .category-section {
+      margin: 40px auto;
+      padding: 0 2rem;
+    }
+
+    .category-section h2 {
+      font-size: 1.8rem;
+      color: #208a25;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #208a25;
+      padding-bottom: 5px;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 0.8rem 0 0.5rem;
+    }
+
+    .product-card p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .product-card button {
+      background-color: #208a25;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .product-card button:hover {
+      background-color: #246b45;
+    }
+
+    .search-bar {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .search-bar input {
+      width: 80%;
+      max-width: 500px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AgriBazaar</h1>
+    <nav>
+      <a href="index.html#home">Home</a>
+      <a href="products.html">Products</a>
+      <a href="transactions.html">My Orders</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()" />
+  </div>
+
+  <!-- VEGETABLES -->
+  <section class="category-section" id="vegetables">
+    <h2>Vegetables</h2>
+    <div class="product-grid">
+      <div class="product-card" data-name="Tomato">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg" alt="Tomato" />
+        <h3>Tomato</h3>
+        <p>₹40/kg</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Carrot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Carrot.jpg" alt="Carrot" />
+        <h3>Carrot</h3>
+        <p>₹30/kg</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRUITS -->
+  <section class="category-section" id="fruits">
+    <h2>Fruits</h2>
+    <div class="product-grid">
+      <div class="product-card" data-name="Apple">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple" />
+        <h3>Apple</h3>
+        <p>₹60/kg</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Banana">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana" />
+        <h3>Banana</h3>
+        <p>₹25/dozen</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAINS -->
+  <section class="category-section" id="grains">
+    <h2>Grains</h2>
+    <div class="product-grid">
+      <div class="product-card" data-name="Wheat">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Wheat_close-up.jpg" alt="Wheat" />
+        <h3>Wheat</h3>
+        <p>₹50/kg</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Rice">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Basmati_rice_%28India%29.jpg" alt="Rice" />
+        <h3>Rice</h3>
+        <p>₹60/kg</p>
+        <button onclick="addToCart(this)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 AgriBazaar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function addToCart(button) {
+      alert("Item added to cart! (Mock function)");
+    }
+
+    function filterProducts() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".product-card");
+
+      cards.forEach(card => {
+        const name = card.getAttribute("data-name").toLowerCase();
+        card.style.display = name.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
