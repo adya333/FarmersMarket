@@ -135,17 +135,20 @@ footer {
 .search-bar-container {
   display: flex;
   justify-content: center;
+  align-items: center; /* Add this to center vertically */
   padding: 1rem;
   background-color: #f8f8f8;
 }
 
 .search-bar-container input {
-  width: 60%;
+  width: 100%;
+  max-width: 600px; /* Add this to limit maximum width */
   padding: 10px 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
 html {
   scroll-behavior: smooth;
 }
