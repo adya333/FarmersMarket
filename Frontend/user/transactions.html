@@ -3,21 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Transactions - AgriBazaar</title>
+  <title>My Orders - AgriBazaar</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #333;
     }
 
     header {
-      background-color: #4CAF50;
+      background-color: #208a25;
       color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
       align-items: center;
     }
 
@@ -32,72 +46,56 @@
       text-decoration: underline;
     }
 
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      min-width: 160px;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      display: block;
-      text-decoration: none;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: #4CAF50;
-      margin-bottom: 20px;
+    .page-title {
       text-align: center;
+      color: #208a25;
+      margin-top: 2rem;
     }
 
     table {
-      width: 100%;
+      width: 90%;
+      margin: 30px auto;
       border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     th, td {
+      border: 1px solid #ccc;
       padding: 12px;
-      border: 1px solid #ddd;
-      text-align: center;
+      text-align: left;
     }
 
     th {
-      background-color: #4CAF50;
+      background-color: #208a25;
       color: white;
     }
 
-    tr:hover {
-      background-color: #f1f1f1;
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
 
-    footer {
-      background-color: #333;
-      color: white;
+    .no-orders {
       text-align: center;
-      padding: 1rem;
-      margin-top: 40px;
+      margin-top: 50px;
+      font-size: 1.2rem;
+      color: #999;
+    }
+
+    .clear-btn {
+      display: block;
+      margin: 20px auto;
+      background-color: #b00020;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover {
+      background-color: #880015;
     }
   </style>
 </head>
@@ -106,67 +104,71 @@
   <header>
     <h1>AgriBazaar</h1>
     <nav>
-      <a href="ex.html">Home</a>
+      <a href="ex.html#home">Home</a>
       <a href="ex.html#products">Products</a>
+      <a href="transactions.html">My Orders</a>
       <a href="ex.html#contact">Contact</a>
-      <div class="dropdown">
-        <a href="#" class="dropbtn">Settings</a>
-        <div class="dropdown-content">
-          <a href="#">Profile</a>
-          <a href="transactions.html">Transactions</a>
-          <a href="#">Farmers</a>
-          <a href="#">Logout</a>
-        </div>
-      </div>
     </nav>
   </header>
 
-  <main>
-    <h2>Your Transactions</h2>
-    <table id="transactionsTable">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Address</th>
-          <th>Payment</th>
-          <th>Items</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Order rows will appear here -->
-      </tbody>
-    </table>
-  </main>
+  <h2 class="page-title">My Orders</h2>
 
-  <footer>
-    <p>&copy; 2025 AgriBazaar. All rights reserved.</p>
-  </footer>
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Items</th>
+        <th>Payment</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody id="ordersBody">
+      <!-- Orders will be loaded here -->
+    </tbody>
+  </table>
+
+  <div class="no-orders" id="noOrders" style="display: none;">No orders found.</div>
+
+  <button id="clearBtn" class="clear-btn" style="display: none;">Clear Order History</button>
 
   <script>
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-    const tbody = document.querySelector("#transactionsTable tbody");
+    const orders = JSON.parse(localStorage.getItem("transactions")) || [];
+    const tbody = document.getElementById("ordersBody");
+    const noOrdersDiv = document.getElementById("noOrders");
+    const clearBtn = document.getElementById("clearBtn");
 
     if (orders.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="5">No transactions found.</td></tr>`;
+      noOrdersDiv.style.display = "block";
+      document.getElementById("ordersTable").style.display = "none";
     } else {
+      clearBtn.style.display = "block";
+
       orders.forEach(order => {
         const row = document.createElement("tr");
 
-        const itemsList = order.items.map(item => `${item.name} x${item.quantity}`).join(", ");
+        const itemsHTML = order.items.map(item =>
+          `${item.name} (₹${item.price} × ${item.quantity})`
+        ).join("<br>");
+
+        const addressText = `${order.address.house}, ${order.address.area}, ${order.address.district}, ${order.address.state} - ${order.address.pincode}`;
 
         row.innerHTML = `
-          <td>${order.date}</td>
-          <td>${order.address}</td>
-          <td>${order.paymentType}</td>
-          <td>${itemsList}</td>
-          <td>₹${order.total}</td>
+          <td>${order.timestamp}</td>
+          <td>${itemsHTML}</td>
+          <td>${order.payment === "cod" ? "Cash on Delivery" : "Online Payment"}</td>
+          <td>${addressText}</td>
         `;
 
         tbody.appendChild(row);
       });
     }
+
+    clearBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to clear all order history?")) {
+        localStorage.removeItem("transactions");
+        location.reload();
+      }
+    });
   </script>
 
 </body>

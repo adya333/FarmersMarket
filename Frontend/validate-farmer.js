@@ -22,83 +22,49 @@ $(document).ready(function () {
             e.preventDefault();
             alert(error);
         } else {
-            $.ajax({
-                url: '/api/farmer/register', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Registered!", res);
-                }
-            });
+            e.preventDefault
+            window.location.href = "../Farmer/index.html"
         }
     });
 
     $("#farmerLoginForm").submit(function (e) {
-        let email = $("#email").val().trim();
-        let password = $("#password").val().trim();
+        let email = $("#loginEmail").val().trim();
+        let password = $("#loginPassword").val().trim();
 
         if (!(/^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
             e.preventDefault();
             alert("Invalid email format.");
         } else {
-            $.ajax({
-                url: '/api/farmer/login', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Logged in!", res);
-                }
-            });
+            e.preventDefault();
+            window.location.href = "../Farmer/index.html"
         }
 
     });
 
-    $("#farmerProductPostingForm").submit(function (e) {
+    $("#addProductForm").submit(function (e) {
+        e.preventDefault();
+
         let productName = $("#productName").val().trim();
-        let category = $("#category").val().trim();
-        let price = parseFloat($("#price").val());
-        let stock = parseInt($("#stock").val());
-        let description = $("#description").val().trim();
+        let category = $("#productCategory").val().trim();
+        let price = parseFloat($("#productPrice").val());
+        let unit = $("productUnit").val().trim();
+        let stock = parseInt($("#productStock").val());
+        let status = $("productStatus").val().trim();
 
         let error = "";
 
         if (productName.length < 3) error = "Product name too short.";
         else if (!category) error = "Category required.";
         else if (isNaN(price) || price <= 0) error = "Invalid price.";
-        else if (isNaN(stock) || stock < 0) error = "Invalid stock.";
-        else if (description.length < 10) error = "Description too short.";
+        else if (isNaN(stock) || stock <= 0) error = "Invalid stock.";
 
+
+        alert(error);
         if (error !== "") {
             alert(error);
-            return;
+        } else {
+            alert
         }
-
-        $.ajax({
-            url: "api/farmer/postProduct", //Placeholder api
-            method: "POST",
-            data: {
-                productName: productName,
-                category: category,
-                price: price,
-                stock: stock,
-                description: description
-            },
-            success: function (res) {
-                alert("Product posted successfully!");
-                $("#farmerProductForm")[0].reset(); 
-            },
-            error: function (xhr) {
-                alert("Error posting product: " + xhr.responseText);
-            }
-        });
     });
 
 });
