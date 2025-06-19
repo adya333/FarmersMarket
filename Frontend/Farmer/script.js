@@ -13,6 +13,10 @@ function toggleOrders() {
 
   btn.textContent = isHidden ? "View Less" : "View More";
 }
+ function toggleRating() {
+    const section = document.getElementById('ratingSection');
+    section.classList.toggle('d-none');
+  }
 
 // Second table toggle for duplicate Recent Orders
 function toggleOrders2() {
