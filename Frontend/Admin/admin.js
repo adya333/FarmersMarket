@@ -407,32 +407,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Common pagination function
-  // Replace the existing updatePagination function with this:
-  function updatePagination(type, totalPages, currentPage) {
-    const prevId = type === 'farmer' ? 'prevFarmerPage' : 'prevUserPage';
-    const nextId = type === 'farmer' ? 'nextFarmerPage' : 'nextUserPage';
-    const paginationContainer = type === 'farmer' ? 
-      document.querySelector('#farmers + nav ul') : 
-      document.querySelector('#users + nav ul');
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const pagination = document.querySelector('.pagination');
     
-    if (!paginationContainer) {
-      console.error('Pagination container not found for:', type);
-      return;
-    }
-
-    // Clear all page items except Previous and Next
-    const pageItems = Array.from(paginationContainer.children);
-    pageItems.forEach(item => {
-      if (item.id !== prevId && item.id !== nextId) {
-          item.remove();
-      }
-    });
-
-    // Get fresh references to prev/next buttons
-    const prevPage = document.getElementById(prevId);
-    const nextPage = document.getElementById(nextId);
-
-    // Add page numbers in correct order (1, 2, 3...)
+    // Clear existing page numbers (except prev/next)
+    const existingPages = document.querySelectorAll('.pagination .page-item:not(#prevPage):not(#nextPage)');
+    existingPages.forEach(page => page.remove());
+    
+    // Add page numbers in correct order
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
+    
+    // Create a document fragment to hold our page items
+    const fragment = document.createDocumentFragment();
+    
+    // Add page numbers in ascending order (1, 2, 3...)
     for (let i = 1; i <= totalPages; i++) {
       const pageItem = document.createElement('li');
       pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
@@ -440,24 +430,25 @@ document.addEventListener('DOMContentLoaded', function() {
       
       pageItem.addEventListener('click', (e) => {
         e.preventDefault();
-        if (type === 'farmer') {
-          currentFarmerPage = i;
-          renderFarmersTable();
-          updateFarmerPagination();
-        } else {
-          currentUserPage = i;
-          renderUsersTable();
-          updateUserPagination();
-        }
+        currentPage = i;
+        renderProductsTable();
+        updatePagination();
       });
       
-      // Insert before the Next button
-      nextPage.before(pageItem);
+      fragment.appendChild(pageItem);
     }
-
-    // Update prev/next buttons state
+    
+    // Insert all page numbers at once between prev and next buttons
+    prevPage.after(fragment);
+    
+    // Update prev/next buttons
     prevPage.classList.toggle('disabled', currentPage === 1);
     nextPage.classList.toggle('disabled', currentPage === totalPages);
+    
+    // Ensure next button stays at the end
+    if (nextPage.parentNode) {
+      nextPage.parentNode.appendChild(nextPage);
+    }
   }
   
   // Delete functionality
@@ -548,4 +539,262 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initialize
   loadUserData();
+});
+
+// products implementation
+document.addEventListener('DOMContentLoaded', function() {
+  let allProducts = [];
+  let filteredProducts = [];
+  let currentProduct = null;
+  const itemsPerPage = 10;
+  let currentPage = 1;
+
+  // Load product data from JSON
+  function loadProducts() {
+    fetch('products.json')
+      .then(response => response.json())
+      .then(data => {
+        allProducts = data.map(product => ({
+          id: product.product_id,
+          name: product.name,
+          category: product.category,
+          farmer: product.farmer,
+          price: product.price,
+          quantity: product.quantity,
+          status: product.status.toLowerCase() // Ensure lowercase for consistency
+        }));
+        applyFilters();
+      })
+      .catch(error => console.error('Error loading products:', error));
+  }
+
+  // Apply filters and search
+  function applyFilters() {
+    const searchTerm = document.getElementById('productSearch').value.toLowerCase();
+    const categoryFilter = document.getElementById('categoryFilter').value;
+    const stockFilter = document.getElementById('stockFilter').value;
+
+    filteredProducts = allProducts.filter(product => {
+      const matchesSearch = 
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.farmer.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm);
+      
+      const matchesCategory = categoryFilter === '' || product.category === categoryFilter;
+      
+      let matchesStock = true;
+      if (stockFilter === 'in-stock') {
+        matchesStock = product.quantity > 0;
+      } else if (stockFilter === 'out-of-stock') {
+        matchesStock = product.quantity <= 0;
+      }
+      
+      return matchesSearch && matchesCategory && matchesStock;
+    });
+
+    renderProductsTable();
+    updatePagination();
+  }
+
+  // Render products table
+  function renderProductsTable() {
+    const tableBody = document.getElementById('productsTableBody');
+    tableBody.innerHTML = '';
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const productsToShow = filteredProducts.slice(startIndex, endIndex);
+    
+    if (productsToShow.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="8" class="text-center">No products found</td></tr>`;
+      return;
+    }
+    
+    productsToShow.forEach(product => {
+      const isInStock = product.status === 'in-stock'; // Check status field
+      const statusClass = isInStock ? 'bg-success' : 'bg-danger';
+      const statusText = isInStock ? 'In Stock' : 'Out of Stock';
+      
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.category}</td>
+        <td>${product.farmer}</td>
+        <td>₹${product.price.toFixed(2)}</td>
+        <td>${product.quantity}</td>
+        <td>
+          <span class="badge ${statusClass}">${statusText}</span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary view-btn" 
+                  data-id="${product.id}"
+                  data-name="${product.name}"
+                  data-farmer="${product.farmer}"
+                  data-category="${product.category}"
+                  data-price="${product.price}"
+                  data-quantity="${product.quantity}"
+                  data-status="${product.status}">
+            <i class="bi bi-eye"></i> View
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    // Add event listeners to view buttons
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', handleViewClick);
+    });
+  }
+
+  // Handle view button click
+  function handleViewClick(e) {
+    const btn = e.currentTarget;
+    const isInStock = btn.getAttribute('data-status') === 'in-stock';
+    
+    currentProduct = {
+      id: btn.getAttribute('data-id'),
+      name: btn.getAttribute('data-name'),
+      farmer: btn.getAttribute('data-farmer'),
+      category: btn.getAttribute('data-category'),
+      price: btn.getAttribute('data-price'),
+      quantity: parseInt(btn.getAttribute('data-quantity')),
+      status: btn.getAttribute('data-status')
+    };
+
+    // Update view modal
+    document.getElementById('viewProductId').textContent = currentProduct.id;
+    document.getElementById('viewProductName').textContent = currentProduct.name;
+    document.getElementById('viewProductFarmer').textContent = currentProduct.farmer;
+    document.getElementById('viewProductCategory').textContent = currentProduct.category;
+    document.getElementById('viewProductPrice').textContent = currentProduct.price;
+    document.getElementById('viewProductQuantity').textContent = currentProduct.quantity;
+    
+    const statusBadge = document.getElementById('viewProductStatus');
+    statusBadge.textContent = isInStock ? 'In Stock' : 'Out of Stock';
+    statusBadge.className = 'badge ' + (isInStock ? 'bg-success' : 'bg-danger');
+
+    // Show/hide notify button
+    document.getElementById('notifyFarmerBtn').style.display = 
+      isInStock ? 'none' : 'block';
+
+    new bootstrap.Modal(document.getElementById('viewProductModal')).show();
+  }
+
+  // Update pagination controls
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const paginationContainer = document.getElementById('productsPagination');
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
+    
+    // Clear existing page numbers (except prev/next)
+    const existingPages = paginationContainer.querySelectorAll('.page-item:not(#prevPage):not(#nextPage)');
+    existingPages.forEach(page => page.remove());
+    
+    // Add page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      const pageItem = document.createElement('li');
+      pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+      pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      
+      pageItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage = i;
+        renderProductsTable();
+      });
+      
+      prevPage.after(pageItem);
+    }
+    
+    // Update prev/next buttons
+    prevPage.classList.toggle('disabled', currentPage === 1);
+    nextPage.classList.toggle('disabled', currentPage === totalPages || totalPages === 0);
+  }
+
+  // Initialize event listeners
+  function setupEventListeners() {
+    // Delete product from view modal
+    document.getElementById('deleteProductBtn').addEventListener('click', () => {
+      document.getElementById('deleteProductName').textContent = currentProduct.name;
+      bootstrap.Modal.getInstance(document.getElementById('viewProductModal')).hide();
+      new bootstrap.Modal(document.getElementById('deleteConfirmModal')).show();
+    });
+
+    // Notify farmer from view modal
+    document.getElementById('notifyFarmerBtn').addEventListener('click', () => {
+      document.getElementById('farmerName').textContent = currentProduct.farmer;
+      document.getElementById('productName').textContent = currentProduct.name;
+      bootstrap.Modal.getInstance(document.getElementById('viewProductModal')).hide();
+      new bootstrap.Modal(document.getElementById('notifyModal')).show();
+    });
+
+    // Confirm delete
+    document.getElementById('confirmDelete').addEventListener('click', () => {
+      allProducts = allProducts.filter(p => p.id !== currentProduct.id);
+      applyFilters();
+      bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+      alert(`Product "${currentProduct.name}" deleted successfully`);
+    });
+
+    // Confirm notification
+    document.getElementById('confirmNotify').addEventListener('click', () => {
+      const message = document.getElementById('notificationMessage').value || 
+                     `Your product ${currentProduct.name} is out of stock. Please restock.`;
+      
+      // Here you would typically send this to your backend
+      console.log(`Notification sent to ${currentProduct.farmer}:`, message);
+      bootstrap.Modal.getInstance(document.getElementById('notifyModal')).hide();
+      alert(`Notification sent to ${currentProduct.farmer}`);
+    });
+
+    // Filter event listeners
+    document.getElementById('productSearch').addEventListener('input', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+
+    document.getElementById('categoryFilter').addEventListener('change', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+
+    document.getElementById('stockFilter').addEventListener('change', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+
+    document.getElementById('resetProductFilters').addEventListener('click', () => {
+      document.getElementById('productSearch').value = '';
+      document.getElementById('categoryFilter').value = '';
+      document.getElementById('stockFilter').value = '';
+      currentPage = 1;
+      applyFilters();
+    });
+
+    // Pagination controls
+    document.getElementById('prevPage').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) {
+        currentPage--;
+        renderProductsTable();
+        updatePagination();
+      }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', (e) => {
+      e.preventDefault();
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderProductsTable();
+        updatePagination();
+      }
+    });
+  }
+
+  // Initialize
+  loadProducts();
+  setupEventListeners();
 });

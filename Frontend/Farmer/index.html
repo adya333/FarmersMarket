@@ -136,7 +136,18 @@
           <!-- Original Welcome Section -->
           <div class="text-center">
             <h2>Welcome, Farmer</h2>
-            <p>!!Rating of the farmer !!</p>
+              <!-- Rating Toggle Button -->
+        <p>
+          <button class="btn btn-link fw-bold text-success text-decoration-none" onclick="toggleRating()">⭐ View Your Rating</button>
+        </p>
+
+        <!-- Hidden Rating Section -->
+        <div id="ratingSection" class="text-center d-none">
+          <h5>Your Rating</h5>
+          <p style="font-size: 20px;">⭐ ⭐ ⭐ ⭐ ☆ <span class="text-muted">(4.0 / 5)</span></p>
+          <p class="text-secondary small">Based on customer feedback from recent orders.</p>
+        </div>
+      </div>
           </div>
 
           <!-- Original Summary Cards -->
@@ -380,58 +391,6 @@
                   class="btn btn-outline-primary"
                   id="toggleBtn"
                   onclick="toggleOrders()"
-                >
-                  View More
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Original Recent Orders (Second Instance) -->
-          <div class="card mb-5 w-75 mx-auto">
-            <div class="card-header bg-success text-white">Recent Orders</div>
-            <div class="card-body">
-              <table class="table table-hover text-center">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody id="orderTable2">
-                  <tr>
-                    <td>#001</td>
-                    <td>Tomato</td>
-                    <td>10kg</td>
-                    <td>₹500</td>
-                    <td><span class="badge bg-success">Delivered</span></td>
-                  </tr>
-                  <tr>
-                    <td>#002</td>
-                    <td>Potato</td>
-                    <td>20kg</td>
-                    <td>₹700</td>
-                    <td>
-                      <span class="badge bg-warning text-dark">Pending</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>#003</td>
-                    <td>Milk</td>
-                    <td>15L</td>
-                    <td>₹1,300</td>
-                    <td><span class="badge bg-success">Delivered</span></td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="text-center">
-                <button
-                  class="btn btn-outline-primary"
-                  id="toggleBtn2"
-                  onclick="toggleOrders2()"
                 >
                   View More
                 </button>
