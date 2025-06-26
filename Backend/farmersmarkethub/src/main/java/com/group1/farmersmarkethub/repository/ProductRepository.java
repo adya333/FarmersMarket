@@ -1,4 +1,4 @@
-package repository;
+package com.group1.farmersmarkethub.repository;
 
 import model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
