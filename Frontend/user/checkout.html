@@ -63,7 +63,7 @@
       font-weight: bold;
     }
 
-    textarea {
+    input[type="text"] {
       width: 100%;
       padding: 12px;
       margin-bottom: 20px;
@@ -157,13 +157,25 @@
   <h2>Checkout</h2>
 
   <form id="checkoutForm">
-    <label for="address">Delivery Address</label>
-    <textarea id="address" rows="4" placeholder="Enter your full delivery address..." required></textarea>
+    <label for="house">House No. / Building</label>
+    <input type="text" id="house" placeholder="e.g. 12A, Green Villa" required />
+
+    <label for="area">Area / Street</label>
+    <input type="text" id="area" placeholder="e.g. MG Road" required />
+
+    <label for="district">District</label>
+    <input type="text" id="district" placeholder="e.g. Bengaluru Urban" required />
+
+    <label for="state">State</label>
+    <input type="text" id="state" placeholder="e.g. Karnataka" required />
+
+    <label for="pincode">Pincode</label>
+    <input type="text" id="pincode" placeholder="e.g. 560001" pattern="\d{6}" required />
 
     <label>Choose Payment Type</label>
     <div class="payment-options">
       <div class="option" id="cod" data-value="cod">
-        <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/96/000000/external-delivery-online-shopping-flaticons-lineal-color-flat-icons-2.png" alt="COD" />
+        <img src="https://t3.ftcdn.net/jpg/06/04/86/68/360_F_604866831_hHgCSigPumPTzg0Vcad9sFOEzdX1xC4t.jpg" alt="COD" />
         <div>Cash on Delivery</div>
       </div>
 
@@ -186,7 +198,6 @@
   </footer>
 
   <script>
-    
     function goBack() {
       window.location.href = "cart.html";
     }
@@ -204,16 +215,40 @@
 
     document.getElementById("checkoutForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const address = document.getElementById("address").value.trim();
+
+      const address = {
+        house: document.getElementById("house").value.trim(),
+        area: document.getElementById("area").value.trim(),
+        district: document.getElementById("district").value.trim(),
+        state: document.getElementById("state").value.trim(),
+        pincode: document.getElementById("pincode").value.trim()
+      };
+
       const payment = paymentInput.value;
 
-      if (!address || !payment) {
+      if (!address.house || !address.area || !address.district || !address.state || !address.pincode || !payment) {
         alert("Please complete all fields.");
         return;
       }
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cart.length > 0) {
+        const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+        const newOrder = {
+          items: cart,
+          address,
+          payment,
+          timestamp: new Date().toLocaleString()
+        };
+
+        transactions.push(newOrder);
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+      }
+
       localStorage.removeItem("cart");
       window.location.href = "success.html";
-      
     });
   </script>
 </body>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { 
   // Load sidebar
   const sidebarContainer = document.getElementById('sidebar-container');
   if (sidebarContainer) {
@@ -249,32 +249,142 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+});
 
-  // Chart.js Initialization
-  try {
-    const ctx = document.getElementById('ordersChart')?.getContext('2d');
+// Dashboard Analytics Implementation
+document.addEventListener('DOMContentLoaded', function() {
+  // Sample data - replace with actual API calls
+  const dashboardData = {
+    orders: {
+      week: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: [5, 9, 7, 8, 6, 12, 10]
+      },
+      month: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        data: [32, 45, 28, 39]
+      },
+      year: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        data: [120, 135, 148, 126, 142, 156, 165, 172, 158, 163, 178, 185]
+      }
+    },
+    topProducts: [
+      { name: 'Organic Tomatoes', sales: 245, revenue: 12250 },
+      { name: 'Fresh Apples', sales: 198, revenue: 9900 },
+      { name: 'Organic Wheat', sales: 156, revenue: 7800 },
+      { name: 'Fresh Milk', sales: 132, revenue: 6600 },
+      { name: 'Free-range Eggs', sales: 120, revenue: 3600 }
+    ],
+    topFarmers: [
+      { name: 'Green Valley Farms', products: 28, orders: 156 },
+      { name: 'Organic Harvest', products: 22, orders: 132 },
+      { name: 'Sunny Acres', products: 18, orders: 98 },
+      { name: 'Fresh Fields', products: 15, orders: 87 },
+      { name: 'Nature\'s Best', products: 12, orders: 76 }
+    ]
+  };
+
+  // Chart initialization
+  let ordersChart;
+  const ctx = document.getElementById('ordersChart')?.getContext('2d');
+  
+  function initChart() {
     if (ctx) {
-      new Chart(ctx, {
+      ordersChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          labels: dashboardData.orders.week.labels,
           datasets: [{
-            label: 'Orders This Week',
-            data: [5, 9, 7, 8, 6, 12, 10],
+            label: 'Number of Orders',
+            data: dashboardData.orders.week.data,
             borderColor: '#208a25',
             backgroundColor: 'rgba(32, 138, 37, 0.1)',
             tension: 0.4,
+            fill: true
           }]
         },
         options: {
           responsive: true,
-          scales: { y: { beginAtZero: true } }
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `Orders: ${context.raw}`;
+                }
+              }
+            }
+          },
+          scales: { 
+            y: { 
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Orders'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Time Period'
+              }
+            }
+          }
         }
       });
     }
-  } catch (e) {
-    console.error("Chart initialization failed:", e);
   }
+
+  // Update chart based on time period
+  function updateChart(timePeriod) {
+    if (!ordersChart) return;
+    
+    ordersChart.data.labels = dashboardData.orders[timePeriod].labels;
+    ordersChart.data.datasets[0].data = dashboardData.orders[timePeriod].data;
+    ordersChart.update();
+  }
+
+  // Render top products
+  function renderTopProducts() {
+    const container = document.getElementById('topProducts');
+    if (!container) return;
+    
+    container.innerHTML = dashboardData.topProducts.map(product => `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <h6 class="mb-0">${product.name}</h6>
+          <small class="text-muted">${product.sales} units sold</small>
+        </div>
+        <span class="badge bg-success">₹${product.revenue.toLocaleString()}</span>
+      </div>
+    `).join('');
+  }
+
+  // Render top farmers
+  function renderTopFarmers() {
+    const container = document.getElementById('topFarmers');
+    if (!container) return;
+    
+    container.innerHTML = dashboardData.topFarmers.map(farmer => `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <h6 class="mb-0">${farmer.name}</h6>
+          <small class="text-muted">${farmer.products} products</small>
+        </div>
+        <span class="badge bg-success">${farmer.orders} orders</span>
+      </div>
+    `).join('');
+  }
+
+  // Time period change handler
+  document.getElementById('timePeriod')?.addEventListener('change', function() {
+    updateChart(this.value);
+  });
+
+  // Initialize everything
+  initChart();
+  renderTopProducts();
+  renderTopFarmers();
 });
 
 // Users Management System
@@ -300,15 +410,18 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('users.json')
       .then(response => response.json())
       .then(data => {
+        console.log('Loaded data:', data); // Debug log
         allFarmers = data.farmers || [];
         allUsers = data.users || [];
+        console.log('Farmers count:', allFarmers.length); // Debug log
+        console.log('Buyers count:', allUsers.length); // Debug log
         applyFarmerFilters();
         applyUserFilters();
       })
       .catch(error => console.error('Error loading user data:', error));
   }
   
-  // Farmers functions
+  // Farmers functions (unchanged)
   function applyFarmerFilters() {
     const searchTerm = document.getElementById('farmerSearch').value.toLowerCase();
     
@@ -345,11 +458,6 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       tableBody.appendChild(row);
     });
-    
-    // Add delete event listeners
-    document.querySelectorAll('#farmersTableBody .delete-btn').forEach(btn => {
-      btn.addEventListener('click', handleDeleteClick);
-    });
   }
   
   function updateFarmerPagination() {
@@ -357,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePagination('farmer', totalPages, currentFarmerPage);
   }
   
-  // Users functions
+  // Users functions - Fixed version
   function applyUserFilters() {
     const searchTerm = document.getElementById('userSearch').value.toLowerCase();
     
@@ -375,30 +483,25 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function renderUsersTable() {
     const tableBody = document.getElementById('usersTableBody');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
+    if (!tableBody) {
+      console.error('usersTableBody not found');
+      return;
+    }
     
     const startIndex = (currentUserPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const usersToShow = filteredUsers.slice(startIndex, endIndex);
+    const usersToShow = filteredUsers.slice(startIndex, startIndex + itemsPerPage);
     
-    usersToShow.forEach(user => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
+    tableBody.innerHTML = usersToShow.map(user => `
+      <tr>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.orders || '0'} orders</td>
         <td><button class="btn btn-sm btn-danger delete-btn" data-id="${user.id}" data-type="user">Delete</button></td>
-      `;
-      tableBody.appendChild(row);
-    });
+      </tr>
+    `).join('');
     
-    // Add delete event listeners
-    document.querySelectorAll('#usersTableBody .delete-btn').forEach(btn => {
-      btn.addEventListener('click', handleDeleteClick);
-    });
+    console.log('Rendered buyers:', usersToShow.length); // Debug log
   }
   
   function updateUserPagination() {
@@ -406,23 +509,32 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePagination('user', totalPages, currentUserPage);
   }
   
-  // Common pagination function
-  function updatePagination() {
-    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-    const pagination = document.querySelector('.pagination');
+  // Fixed Common pagination function
+  function updatePagination(type, totalPages, currentPage) {
+    const prevId = type === 'farmer' ? 'prevFarmerPage' : 'prevUserPage';
+    const nextId = type === 'farmer' ? 'nextFarmerPage' : 'nextUserPage';
+    const paginationContainer = type === 'farmer' ? 
+      document.querySelector('#farmers + nav ul') : 
+      document.querySelector('#users + nav ul');
     
-    // Clear existing page numbers (except prev/next)
-    const existingPages = document.querySelectorAll('.pagination .page-item:not(#prevPage):not(#nextPage)');
-    existingPages.forEach(page => page.remove());
-    
-    // Add page numbers in correct order
-    const prevPage = document.getElementById('prevPage');
-    const nextPage = document.getElementById('nextPage');
-    
-    // Create a document fragment to hold our page items
-    const fragment = document.createDocumentFragment();
-    
-    // Add page numbers in ascending order (1, 2, 3...)
+    if (!paginationContainer) {
+      console.error('Pagination container not found for:', type);
+      return;
+    }
+
+    // Clear all page items except Previous and Next
+    const pageItems = Array.from(paginationContainer.children);
+    pageItems.forEach(item => {
+      if (item.id !== prevId && item.id !== nextId) {
+          item.remove();
+      }
+    });
+
+    // Get fresh references to prev/next buttons
+    const prevPage = document.getElementById(prevId);
+    const nextPage = document.getElementById(nextId);
+
+    // Add page numbers in correct order (1, 2, 3...)
     for (let i = 1; i <= totalPages; i++) {
       const pageItem = document.createElement('li');
       pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
@@ -430,38 +542,53 @@ document.addEventListener('DOMContentLoaded', function() {
       
       pageItem.addEventListener('click', (e) => {
         e.preventDefault();
-        currentPage = i;
-        renderProductsTable();
-        updatePagination();
+        if (type === 'farmer') {
+          currentFarmerPage = i;
+          renderFarmersTable();
+          updateFarmerPagination();
+        } else {
+          currentUserPage = i;
+          renderUsersTable();
+          updateUserPagination();
+        }
       });
       
-      fragment.appendChild(pageItem);
+      // Insert before the Next button
+      nextPage.before(pageItem);
     }
-    
-    // Insert all page numbers at once between prev and next buttons
-    prevPage.after(fragment);
-    
-    // Update prev/next buttons
+
+    // Update prev/next buttons state
     prevPage.classList.toggle('disabled', currentPage === 1);
     nextPage.classList.toggle('disabled', currentPage === totalPages);
-    
-    // Ensure next button stays at the end
-    if (nextPage.parentNode) {
-      nextPage.parentNode.appendChild(nextPage);
-    }
   }
   
-  // Delete functionality
+  // Delete functionality - Improved version
   function handleDeleteClick(e) {
+    // Only handle delete button clicks
+    if (!e.target.classList.contains('delete-btn')) return;
+    
     e.preventDefault();
+    e.stopPropagation();
+    
     userToDelete = {
       id: e.target.getAttribute('data-id'),
       type: e.target.getAttribute('data-type')
     };
-    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+    
+    console.log('Delete initiated for:', userToDelete); // Debug log
+    
+    // Show the confirmation modal
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteModal.show();
   }
   
-  // Event listeners
+  // Event listeners - Added tab activation handler
+  document.getElementById('users-tab')?.addEventListener('shown.bs.tab', function() {
+    console.log('Buyers tab activated - refreshing data');
+    applyUserFilters();
+  });
+
+  // Other event listeners (unchanged)
   document.getElementById('farmerSearch').addEventListener('input', () => {
     currentFarmerPage = 1;
     applyFarmerFilters();
@@ -523,20 +650,36 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   document.getElementById('confirmDelete').addEventListener('click', () => {
-    if (!userToDelete) return;
-    
-    if (userToDelete.type === 'farmer') {
-      allFarmers = allFarmers.filter(f => f.id !== userToDelete.id);
-      applyFarmerFilters();
-    } else {
-      allUsers = allUsers.filter(u => u.id !== userToDelete.id);
-      applyUserFilters();
+    if (!userToDelete) {
+      console.warn('No user selected for deletion');
+      return;
     }
     
-    bootstrap.Modal.getInstance(document.getElementById('deleteModal')).hide();
+    console.log('Deleting:', userToDelete); // Debug log
+    
+    if (userToDelete.type === 'farmer') {
+      allFarmers = allFarmers.filter(f => f.id != userToDelete.id);
+      applyFarmerFilters();
+      console.log('Farmer deleted. Remaining:', allFarmers.length);
+    } else if (userToDelete.type === 'user') {
+      allUsers = allUsers.filter(u => u.id != userToDelete.id);
+      applyUserFilters();
+      console.log('User deleted. Remaining:', allUsers.length);
+    }
+    
+    // Hide the modal
+    const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+    deleteModal.hide();
+    
     userToDelete = null;
   });
   
+  // Use event delegation for delete buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('delete-btn')) {
+      handleDeleteClick(e);
+    }
+  });
   // Initialize
   loadUserData();
 });
@@ -584,9 +727,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       let matchesStock = true;
       if (stockFilter === 'in-stock') {
-        matchesStock = product.quantity > 0;
+        matchesStock = product.status === 'in-stock';
       } else if (stockFilter === 'out-of-stock') {
-        matchesStock = product.quantity <= 0;
+        matchesStock = product.status === 'out-of-stock';
       }
       
       return matchesSearch && matchesCategory && matchesStock;
@@ -627,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <span class="badge ${statusClass}">${statusText}</span>
         </td>
         <td>
-          <button class="btn btn-sm btn-primary view-btn" 
+          <button class="btn btn-sm btn-success view-btn" 
                   data-id="${product.id}"
                   data-name="${product.name}"
                   data-farmer="${product.farmer}"

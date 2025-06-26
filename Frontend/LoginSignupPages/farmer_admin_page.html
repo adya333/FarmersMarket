@@ -2,22 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Farmer Login</title>
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2909/2909769.png">
+  <title>Admin Farmer Auth</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../validate-admin.js"></script>
   <style>
     body {
-      background: url('https://www.istockphoto.com/photo/100-percent-natural-symbol-sign-stamp-on-linen-sack-gm1344219406-422626910') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1582272756033-d52b1f52db62') no-repeat center center fixed;
       background-size: cover;
-      background-color: #f0fdf4;
       font-family: 'Segoe UI', sans-serif;
-      position: relative;
     }
-
-   
 
     .form-container {
       max-width: 420px;
@@ -26,20 +22,6 @@
       border-radius: 12px;
       background-color: rgba(255, 255, 255, 0.95);
       box-shadow: 0 0 12px rgba(0, 128, 0, 0.3);
-      position: relative;
-      z-index: 1;
-    }
-
-    h1 {
-      text-align: center;
-      color: #145214;
-      margin-top: 50px;
-      position: relative;
-      z-index: 1;
-    }
-
-    label {
-      color: #155724;
     }
 
     .btn-primary {
@@ -50,45 +32,67 @@
     .btn-primary:hover {
       background-color: #218838;
     }
+
+    .nav-pills .nav-link.active {
+      background-color: #28a745;
+    }
   </style>
 </head>
 <body>
 
-  <h1><img src="C:\Users\ayush\OneDrive\Desktop\FarmersMarket\Frontend\asessts\logo.jpg" height="120px" width="120px"></h1><hr><h1>Farmer/Admin Login</h1>
+  <div class="container text-center mt-4">
+    <h2 class="text-success mt-2">Admin Portal</h2>
+  </div>
 
+  <!-- Nav Pills -->
+  <ul class="nav nav-pills justify-content-center mt-4" id="authTabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#" data-target="loginForm">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" data-target="signupForm">Signup</a>
+    </li>
+  </ul>
+
+  <!-- Forms -->
   <div class="form-container">
-    <form id="adminLoginForm">
+    <!-- Login Form -->
+    <form id="loginForm">
+      <h4 class="text-center mb-3">Login</h4>
       <div class="mb-3">
-        <label for="adminEmail" class="form-label">Admin Email</label>
+        <label for="adminEmail" class="form-label">Email</label>
         <input id="adminEmail" type="email" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="adminPhone" class="form-label">Phone Number</label>
-        <input id="adminPhone" type="tel" class="form-control" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
       </div>
       <div class="mb-3">
         <label for="adminPassword" class="form-label">Password</label>
         <input id="adminPassword" type="password" class="form-control" required>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Login as Admin</button>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signupForm" class="d-none">
+      <h4 class="text-center mb-3">Signup</h4>
+      <div class="mb-3">
+        <label for="signupEmail" class="form-label">Email</label>
+        <input id="signupEmail" type="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="signupPhone" class="form-label">Phone Number</label>
+        <input id="signupPhone" type="tel" class="form-control" required pattern="[0-9]{10}">
+      </div>
+      <div class="mb-3">
+        <label for="signupPassword" class="form-label">Password</label>
+        <input id="signupPassword" type="password" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+        <input id="signupConfirmPassword" type="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Create Account</button>
     </form>
   </div>
 
-  <script>
-    $("#adminLoginForm").submit(function (e) {
-      e.preventDefault();
-      const email = $("#adminEmail").val().trim();
-      const phone = $("#adminPhone").val().trim();
-      const password = $("#adminPassword").val().trim();
-
-      if (email === "admin@agribazaar.com" && password === "admin123" && /^\d{10}$/.test(phone)) {
-        alert("Admin Login Successful!");
-        // Redirect to admin dashboard or panel
-      } else {
-        alert("Invalid credentials or phone number.");
-      }
-    });
-  </script>
 
 </body>
 </html>

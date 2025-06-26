@@ -22,31 +22,10 @@ function searchProducts() {
   const priceText = productCard.querySelector("p").textContent;
   const price = parseInt(priceText.replace(/[^0-9]/g, ""));
 
-  // Create quantity container
-  const quantityDiv = document.createElement("div");
-  quantityDiv.className = "quantity-controls";
-
-  const minusBtn = document.createElement("button");
-  minusBtn.textContent = "-";
-
-  const quantitySpan = document.createElement("span");
-  quantitySpan.textContent = "1";
-  quantitySpan.className = "quantity-number";
-
-  const plusBtn = document.createElement("button");
-  plusBtn.textContent = "+";
-
-  quantityDiv.appendChild(minusBtn);
-  quantityDiv.appendChild(quantitySpan);
-  quantityDiv.appendChild(plusBtn);
-
-  parent.replaceChild(quantityDiv, button);
-
-  // Update cart in localStorage
+  // Get or update cart
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // Check if item already exists
   const existingItem = cart.find(item => item.name === name);
+
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
@@ -54,7 +33,45 @@ function searchProducts() {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  showCartButtonIfNeeded(); // ✅ This ensures button shows up
+
+  // Check if quantity controls already exist
+  let quantityDiv = parent.querySelector(".quantity-controls");
+
+  if (!quantityDiv) {
+    // Create quantity controls only if not already present
+    quantityDiv = document.createElement("div");
+    quantityDiv.className = "quantity-controls";
+
+    const minusBtn = document.createElement("button");
+    minusBtn.textContent = "-";
+
+    const quantitySpan = document.createElement("span");
+    quantitySpan.className = "quantity-number";
+    quantitySpan.textContent = existingItem ? existingItem.quantity : 1;
+
+    const plusBtn = document.createElement("button");
+    plusBtn.textContent = "+";
+
+    // Add handlers
+    plusBtn.addEventListener("click", () => {
+      updateQuantity(quantitySpan, +1, name);
+    });
+
+    minusBtn.addEventListener("click", () => {
+      updateQuantity(quantitySpan, -1, name);
+    });
+
+    quantityDiv.appendChild(minusBtn);
+    quantityDiv.appendChild(quantitySpan);
+    quantityDiv.appendChild(plusBtn);
+
+    parent.replaceChild(quantityDiv, button);
+  } else {
+    const quantitySpan = quantityDiv.querySelector(".quantity-number");
+    quantitySpan.textContent = existingItem ? existingItem.quantity : 1;
+  }
+
+  showCartButtonIfNeeded();
 }
 
 

@@ -1,9 +1,11 @@
 #!/bin/bash
 
+echo "Running archive script..."
+
 # Configuration
-BACKUP_DIR="/mnt/c/Users/windows 11/Documents/backups/frontend_archives"
-PROJECT_DIR="/mnt/c/Users/windows 11/Downloads/practice/Sprint1/FarmersMarket"
-LOG_FILE="$HOME/frontend_archive.log"
+BACKUP_DIR="./scripts/backups/frontend_archives"
+PROJECT_DIR="."
+LOG_FILE="./scripts/backups/frontend_archive.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 ARCHIVE_NAME="frontend_backup_${TIMESTAMP}.tar.gz"
 

@@ -18,46 +18,23 @@ $(document).ready(function () {
             error = "Passwords don’t match.";
 
 
+        e.preventDefault();
         if (error !== "") {
-            e.preventDefault();
             alert(error);
         } else {
-            $.ajax({
-                url: '/api/user/register', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    username: username,
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Registered!", res);
-                }
-            });
+            window.location.href = "../user/ex.html";
         }
     });
 
-    $("#userLoginForm").submit(function (e) {
+    $("#loginForm").submit(function (e) {
         let email = $("#email").val().trim();
         let password = $("#password").val().trim();
 
-        if (!(/^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
-            e.preventDefault();
+        e.preventDefault();
+        if ((/^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
             alert("Invalid email format.");
         } else {
-            $.ajax({
-                url: '/api/user/login', //Placeholder api, upto backend developer to set
-                method: 'POST',
-                data: {
-                    email: email,
-                    password: password
-                },
-                contentType: "application/json",
-                success: function (res) {
-                    console.log("Logged in!", res);
-                }
-            });
+            window.location.href = "../user/ex.html";
         }
 
     });
