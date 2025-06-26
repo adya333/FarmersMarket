@@ -1,4 +1,4 @@
-package com.group1.farmersmarkethub.services;
+package com.group1.farmersmarkethub.service;
 
 import com.group1.farmersmarkethub.model.Order;
 import com.group1.farmersmarkethub.repository.OrderRepository;
