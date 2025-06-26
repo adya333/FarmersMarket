@@ -1,0 +1,5 @@
+# Ignore backup archives
+/scripts/backups/frontend_archives/
+
+# Ignore log file
+/scripts/backups/frontend_archive.log
