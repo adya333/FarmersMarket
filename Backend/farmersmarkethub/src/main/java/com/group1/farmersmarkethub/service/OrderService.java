@@ -11,9 +11,9 @@ import java.util.Optional;
 @Service
 public class OrderService {
 
+    @Autowired
     private final OrderRepository orderRepo;
 
-    @Autowired
     public OrderService(OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
     }

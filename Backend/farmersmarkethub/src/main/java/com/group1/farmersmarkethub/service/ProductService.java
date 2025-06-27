@@ -1,19 +1,20 @@
 package com.group1.farmersmarkethub.service;
 
-import com.group1.farmersmarkethub.model.Product;
-import com.group1.farmersmarkethub.repository.ProductRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.group1.farmersmarkethub.model.Product;
+import com.group1.farmersmarkethub.repository.ProductRepository;
 
 @Service
 public class ProductService {
 
+    @Autowired
     private final ProductRepository productRepo;
 
-    @Autowired
     public ProductService(ProductRepository productRepo) {
         this.productRepo = productRepo;
     }
