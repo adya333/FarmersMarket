@@ -19,7 +19,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -46,9 +46,9 @@ public class Order {
 
     @ElementCollection
     @CollectionTable(name = "order_quantities", joinColumns = @JoinColumn(name = "order_id"))
-    @MapKeyJoinColumn(name = "product_id")
+    @MapKeyColumn(name = "product_id")
     @Column(name = "quantity")
-    private Map<Product, Integer> quantities;
+    private Map<Long, Integer> quantities;
 
     @Column(name = "net_price")
     private Double netPrice;
