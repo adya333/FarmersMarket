@@ -17,18 +17,18 @@ import com.group1.farmersmarkethub.model.User;
 import com.group1.farmersmarkethub.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.registerUser(user));
+    @PostMapping("/register")
+    public void registerUser(@RequestBody User user){
+        userService.registerUser(user);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }

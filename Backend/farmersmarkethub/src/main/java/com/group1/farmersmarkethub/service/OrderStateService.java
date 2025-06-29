@@ -1,10 +1,11 @@
 package com.group1.farmersmarkethub.service;
 
-import com.group1.farmersmarkethub.model.OrderState;
-import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.group1.farmersmarkethub.util.OrderState;
 @Service
 public class OrderStateService {
     public List<OrderState> getAllStates() {

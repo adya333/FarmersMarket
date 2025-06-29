@@ -1,4 +1,4 @@
-package com.group1.farmersmarkethub.model;
+package com.group1.farmersmarkethub.util;
 
 public enum OrderState {
     PROCESSING,
