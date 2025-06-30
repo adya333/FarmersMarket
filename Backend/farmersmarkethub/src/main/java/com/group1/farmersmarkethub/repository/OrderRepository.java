@@ -1,12 +1,13 @@
 package com.group1.farmersmarkethub.repository;
 
-import com.group1.farmersmarkethub.model.Order;
-import com.group1.farmersmarkethub.model.OrderState;
-import com.group1.farmersmarkethub.model.User;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.group1.farmersmarkethub.model.Order;
+import com.group1.farmersmarkethub.model.User;
+import com.group1.farmersmarkethub.util.OrderState;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
